@@ -11,29 +11,40 @@ import Foundation
 
 class NetworkingServiceStub: INetworkingService {
 
-    var success: Bool = false
+    private var success: Bool = false
+    private var resultData: [String] = []
     
     func setSuccess(_ flag: Bool) {
         success = flag
     }
     
+    func setResultData(_ data: [String]) {
+        resultData = data
+    }
+    
     func request(_ api: ServerAPI, parameters: [String : Any]?) -> IDataRequest? {
-        return DataRequestStub(success: success)
+        return DataRequestStub(success: success, resultData: resultData)
     }
 }
 
 struct DataRequestStub: IDataRequest {
     
     private(set) var success: Bool
-    private let data = ["1","2"]
+    private(set) var resultData: [String]
     private let error = ServerAPIResponseError()
-    private let successJsonString = """
-    {
-      "statusCode": 200,
-      "body": ["1","2"],
-      "scanned_count": 20
+    private var successJsonString: String {
+        var string: String = "[]"
+        if resultData.isEmpty == false {
+            string = "[\(String(describing: resultData.first))"
+            resultData.forEach{ string += ",\"\($0)\""}
+            string += "]"
+        }
+        return """
+        {
+          "items": \(string),
+        }
+        """
     }
-    """
     
     func response<T>(_ completion: @escaping (Result<T, ServerAPIResponseError>) -> Void) -> DataRequestStub where T : IServerAPIModel {
         if success {
