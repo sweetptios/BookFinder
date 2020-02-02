@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductIndexViewController" customModule="BookFinder" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="meA-a6-pFx" id="zEA-12-GuH"/>
+                <outlet property="filterView" destination="2Ju-zu-Pb7" id="ml3-B6-ABA"/>
+                <outlet property="filterViewTopConstraint" destination="e4f-TH-Yw8" id="GiY-te-Al9"/>
+                <outlet property="flowLayout" destination="2nA-TM-g2Q" id="yfn-7a-K7b"/>
+                <outlet property="loadingIndicatorView" destination="Msa-A0-q2M" id="h3b-By-a6J"/>
+                <outlet property="searchBarView" destination="83Q-rP-J2t" id="o8X-zo-A2b"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zz-iT-JTY">
+                    <rect key="frame" x="0.0" y="98" width="375" height="714"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="meA-a6-pFx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="714"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2nA-TM-g2Q">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="9tn-ww-L4z"/>
+                                <outlet property="delegate" destination="-1" id="73G-P6-UJr"/>
+                            </connections>
+                        </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ju-zu-Pb7" customClass="ProductIndexFilterView" customModule="BookFinder" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj2-0c-ZKa">
+                                    <rect key="frame" x="311" y="8" width="54" height="34"/>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Dj2-0c-ZKa" secondAttribute="trailing" constant="10" id="fYL-86-yNA"/>
+                                <constraint firstItem="Dj2-0c-ZKa" firstAttribute="centerY" secondItem="2Ju-zu-Pb7" secondAttribute="centerY" id="nzX-Vq-bfr"/>
+                                <constraint firstAttribute="height" constant="50" id="q1j-3a-91a"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="meA-a6-pFx" secondAttribute="bottom" id="1Dr-Nh-65E"/>
+                        <constraint firstItem="meA-a6-pFx" firstAttribute="top" secondItem="8Zz-iT-JTY" secondAttribute="top" id="6SI-Et-2YG"/>
+                        <constraint firstAttribute="trailing" secondItem="2Ju-zu-Pb7" secondAttribute="trailing" id="FVi-k6-aZS"/>
+                        <constraint firstAttribute="trailing" secondItem="meA-a6-pFx" secondAttribute="trailing" id="K4F-6s-gpu"/>
+                        <constraint firstItem="2Ju-zu-Pb7" firstAttribute="leading" secondItem="8Zz-iT-JTY" secondAttribute="leading" id="b6N-gA-vP8"/>
+                        <constraint firstItem="2Ju-zu-Pb7" firstAttribute="top" secondItem="8Zz-iT-JTY" secondAttribute="top" id="e4f-TH-Yw8"/>
+                        <constraint firstItem="meA-a6-pFx" firstAttribute="leading" secondItem="8Zz-iT-JTY" secondAttribute="leading" id="opa-4Q-8iT"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oc8-V9-lAq">
+                    <rect key="frame" x="0.0" y="44" width="375" height="54"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="83Q-rP-J2t">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="idm-Sp-S7y"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="83Q-rP-J2t" secondAttribute="trailing" id="7oM-QK-B0v"/>
+                        <constraint firstItem="83Q-rP-J2t" firstAttribute="leading" secondItem="oc8-V9-lAq" secondAttribute="leading" id="JQp-b3-o7M"/>
+                        <constraint firstItem="83Q-rP-J2t" firstAttribute="top" secondItem="oc8-V9-lAq" secondAttribute="top" id="Jav-qp-2Bb"/>
+                        <constraint firstAttribute="height" constant="54" id="Nne-C8-Ew2"/>
+                        <constraint firstAttribute="bottom" secondItem="83Q-rP-J2t" secondAttribute="bottom" id="Xha-vj-rNb"/>
+                    </constraints>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Msa-A0-q2M">
+                    <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="8Zz-iT-JTY" secondAttribute="bottom" id="2sQ-or-qJ7"/>
+                <constraint firstItem="oc8-V9-lAq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4YT-Dc-dP4"/>
+                <constraint firstItem="8Zz-iT-JTY" firstAttribute="top" secondItem="oc8-V9-lAq" secondAttribute="bottom" id="Crp-wQ-pMV"/>
+                <constraint firstItem="oc8-V9-lAq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Dog-JC-hfH"/>
+                <constraint firstItem="oc8-V9-lAq" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="JRS-3x-XZi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8Zz-iT-JTY" secondAttribute="trailing" id="cDM-YC-8xe"/>
+                <constraint firstItem="Msa-A0-q2M" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vMB-EO-5cz"/>
+                <constraint firstItem="Msa-A0-q2M" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xf1-eG-RoI"/>
+                <constraint firstItem="8Zz-iT-JTY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zid-6a-C2T"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="136.875" y="151.05633802816902"/>
+        </view>
+    </objects>
+</document>

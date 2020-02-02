@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="MoreIndicatorView" customModule="Shoppingmall" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="456" height="84"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="54V-KA-AhO">
+                    <rect key="frame" x="218" y="32" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Oe3-Fq-oBo"/>
+                        <constraint firstAttribute="width" constant="20" id="SDo-di-Qsx"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxT-4r-CXt">
+                    <rect key="frame" x="205" y="27" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="uxT-4r-CXt" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="BoY-jD-Nor"/>
+                <constraint firstItem="54V-KA-AhO" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="TO1-vY-WuP"/>
+                <constraint firstItem="uxT-4r-CXt" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="lgA-jU-ycK"/>
+                <constraint firstItem="54V-KA-AhO" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="yFK-Xl-nru"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="indicator" destination="54V-KA-AhO" id="h80-hg-raz"/>
+                <outlet property="retryButton" destination="uxT-4r-CXt" id="VnK-VT-FbT"/>
+            </connections>
+            <point key="canvasLocation" x="-34.782608695652179" y="128.57142857142856"/>
+        </collectionReusableView>
+    </objects>
+</document>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ConfirmView" customModule="Shoppingmall" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="433" height="122"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bn-ZE-Prq">
+                    <rect key="frame" x="24" y="40" width="385" height="52"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYR-fY-4La">
+                            <rect key="frame" x="0.0" y="0.0" width="385" height="52"/>
+                            <connections>
+                                <action selector="pressedConfirmButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="qd8-x6-tSB"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32c-Uq-zMt">
+                            <rect key="frame" x="171.5" y="15.5" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="32c-Uq-zMt" firstAttribute="centerX" secondItem="8bn-ZE-Prq" secondAttribute="centerX" id="G1j-hH-J9T"/>
+                        <constraint firstItem="dYR-fY-4La" firstAttribute="top" secondItem="8bn-ZE-Prq" secondAttribute="top" id="erR-qu-MNB"/>
+                        <constraint firstAttribute="height" constant="52" id="g48-HA-7ad"/>
+                        <constraint firstAttribute="bottom" secondItem="dYR-fY-4La" secondAttribute="bottom" id="kqS-iX-aLr"/>
+                        <constraint firstAttribute="trailing" secondItem="dYR-fY-4La" secondAttribute="trailing" id="ozZ-aT-qog"/>
+                        <constraint firstItem="dYR-fY-4La" firstAttribute="leading" secondItem="8bn-ZE-Prq" secondAttribute="leading" id="uOg-Ue-NmS"/>
+                        <constraint firstItem="32c-Uq-zMt" firstAttribute="centerY" secondItem="8bn-ZE-Prq" secondAttribute="centerY" id="zEF-WQ-4q3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8bn-ZE-Prq" secondAttribute="trailing" constant="24" id="0Os-Sj-b0P"/>
+                <constraint firstItem="8bn-ZE-Prq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="JSe-IN-yyU"/>
+                <constraint firstItem="8bn-ZE-Prq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="v6X-oQ-tfx"/>
+                <constraint firstAttribute="bottom" secondItem="8bn-ZE-Prq" secondAttribute="bottom" constant="30" id="vzH-9u-jQA"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="confirmButton" destination="dYR-fY-4La" id="FTq-fK-m2H"/>
+                <outlet property="titleLabel" destination="32c-Uq-zMt" id="NqW-eD-T2T"/>
+            </connections>
+            <point key="canvasLocation" x="100" y="72.413793103448285"/>
+        </view>
+    </objects>
+</document>
