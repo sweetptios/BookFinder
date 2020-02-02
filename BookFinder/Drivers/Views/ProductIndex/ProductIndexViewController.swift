@@ -80,7 +80,7 @@ extension ProductIndexViewController {
         if #available(iOS 13.0, *) {
             searchBarView?.searchTextField.backgroundColor = AppColor.cFFFFFF
         }
-        searchBarView?.placeholder = "검색"
+        searchBarView?.placeholder = "읽고싶은 책을 찾아보세요"
         searchBarView?.backgroundImage = UIImage()
     }
     
