@@ -1,5 +1,5 @@
 //
-//  ProductRepositoryStub.swift
+//  BookRepositoryStub.swift
 //  cosmeticsTests
 //
 //  Created by mine on 2020/01/15.
@@ -9,7 +9,7 @@
 import Foundation
 @testable import BookFinder
 
-class ProductSummaryRepositoryStub: IRepositoryStub<(books: [Book], totalCount: Int)>, IBookSummaryRepository {
+class BookSummaryRepositoryStub: IRepositoryStub<(books: [Book], totalCount: Int)>, IBookSummaryRepository {
     func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         callCompletion(completion)
     }

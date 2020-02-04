@@ -1,5 +1,5 @@
 //
-//  ProductIndexItemCell.swift
+//  BookIndexItemCell.swift
 //  Shoppingmall
 //
 //  Created by mine on 2019/12/05.
@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class ProductIndexItemCell: UICollectionViewCell, CollectionItemView {
+class BookIndexItemCell: UICollectionViewCell, CollectionItemView {
     @IBOutlet weak var thumbnailImageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var authorsLabel: UILabel?
@@ -22,7 +22,7 @@ class ProductIndexItemCell: UICollectionViewCell, CollectionItemView {
     }
 
     func configure(_ data: CollectionItemViewModel) {
-        if let data = data as? ProductIndexCollectionItemViewData {
+        if let data = data as? BookIndexCollectionItemViewData {
             #warning("TODO - 어댑터")
             thumbnailImageView?.kf.setImage(with: data.thumbnailUrl, placeholder: UIImage(named: "no_cover_thumb"))
             titleLabel?.text = data.title
@@ -39,10 +39,10 @@ class ProductIndexItemCell: UICollectionViewCell, CollectionItemView {
     }
 }
 
-extension ProductIndexItemCell {
+extension BookIndexItemCell {
     
     private func setupImageView() {
-        thumbnailImageWidthConstraint?.constant = ProductIndexLayout.thumbnailSize.width
+        thumbnailImageWidthConstraint?.constant = BookIndexLayout.thumbnailSize.width
         thumbnailImageView?.contentMode = .scaleAspectFill
         thumbnailImageView?.layer.cornerRadius = 1
         thumbnailImageView?.layer.masksToBounds = true

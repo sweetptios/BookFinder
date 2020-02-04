@@ -1,5 +1,5 @@
 //
-//  ProductSummaryRepositoryTests.swift
+//  BookSummaryRepositoryTests.swift
 //  cosmeticsTests
 //
 //  Created by mine on 2020/01/18.
@@ -11,14 +11,13 @@ import XCTest
 import Stubber
 import Nimble
 
-class ProductSummaryRepositoryTests: XCTestCase {
+class BookSummaryRepositoryTests: XCTestCase {
 
     var repository: IBookSummaryRepository!
     let networkingStub = NetworkingServiceStub()
     
     override func setUp() {
-       
-        repository = ProductSummaryRepository(networking: networkingStub)
+        repository = BookSummaryRepository(networking: networkingStub)
     }
 
     override func tearDown() {}
@@ -44,7 +43,7 @@ class ProductSummaryRepositoryTests: XCTestCase {
             }
         """)
         let testTotalCount = 4
-        let testProducts = [ Book(title: "a"), Book(title: "b") ]
+        let testBooks = [ Book(title: "a"), Book(title: "b") ]
         // [when]
         let dummyPage = 0
         let dummyKeyword = ""
@@ -53,8 +52,8 @@ class ProductSummaryRepositoryTests: XCTestCase {
             // [then]
             switch(result) {
             case let .success(data):
-                expect(data.books[0].title).to(equal(testProducts[0].title))
-                expect(data.books[1].title).to(equal(testProducts[1].title))
+                expect(data.books[0].title).to(equal(testBooks[0].title))
+                expect(data.books[1].title).to(equal(testBooks[1].title))
                 expect(data.totalCount).to(equal(testTotalCount))
                 XCTAssert(true)
             case .failure(let error):

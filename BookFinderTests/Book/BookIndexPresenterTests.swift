@@ -1,5 +1,5 @@
 //
-//  ProductIndexPresenterTests.swift
+//  BookIndexPresenterTests.swift
 //  cosmeticsTests
 //
 //  Created by mine on 2020/01/15.
@@ -11,14 +11,14 @@ import XCTest
 import Stubber
 import Nimble
 
-class ProductIndexPresenterTests: XCTestCase {
+class BookIndexPresenterTests: XCTestCase {
 
-    var presenter: ProductIndexPresenter!
-    var viewMock: ProductIndexViewMock!
+    var presenter: BookIndexPresenter!
+    var viewMock: BookIndexViewMock!
     
     override func setUp() {
-        viewMock = ProductIndexViewMock()
-        presenter = ProductIndexPresenter()
+        viewMock = BookIndexViewMock()
+        presenter = BookIndexPresenter()
         presenter.setView(viewMock)
     }
 
@@ -26,16 +26,16 @@ class ProductIndexPresenterTests: XCTestCase {
     
     func test_책리스트를보여줄수있다() {
         // [given]
-        Stubber.register(viewMock.showProducts) { _ in }
+        Stubber.register(viewMock.showBooks) { _ in }
         let date = Date()
         let displayedDate = date.string(format: "yyyy-MM-dd")
-        let book1 = ProductSummary(from: Book(id: "akjldf", title: "TDD 시작하기",authors: ["Hannah","Ashley"], publishedDate: date, thumbnailImage: URL(string: "http://picture.com/thumb/1")))
+        let book1 = BookSummary(from: Book(id: "akjldf", title: "TDD 시작하기",authors: ["Hannah","Ashley"], publishedDate: date, thumbnailImage: URL(string: "http://picture.com/thumb/1")))
         let displayedAuthor = "\(book1.authors.first ?? "")외 \(book1.authors.count)명"
-        let viewData1 = ProductIndexCollectionItemViewData(id: book1.id, thumbnailUrl: book1.thumbnailImage, title: book1.title, author: displayedAuthor, publishedDate: displayedDate)
+        let viewData1 = BookIndexCollectionItemViewData(id: book1.id, thumbnailUrl: book1.thumbnailImage, title: book1.title, author: displayedAuthor, publishedDate: displayedDate)
         // [when]
-        presenter.showProducts([book1])
+        presenter.showBooks([book1])
         // [then]
-        let f = Stubber.executions(self.viewMock.showProducts)
+        let f = Stubber.executions(self.viewMock.showBooks)
         let list = f[0].arguments
             
         expect(list[0].id).to(equal(viewData1.id))

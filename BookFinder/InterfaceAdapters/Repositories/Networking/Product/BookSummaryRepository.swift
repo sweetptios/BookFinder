@@ -1,5 +1,5 @@
 //
-//  ProductSummaryRepository.swift
+//  BookSummaryRepository.swift
 //  Shoppingmall
 //
 //  Created by mine on 2019/12/03.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProductSummaryRepository: IBookSummaryRepository {
+class BookSummaryRepository: IBookSummaryRepository {
     
     private let networking: INetworkingService
     #warning("TODO - 의존성 주입? - 화면 구성에 따라 달라질 수 있어야 한다. ")

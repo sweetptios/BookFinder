@@ -1,5 +1,5 @@
 //
-//  Product.swift
+//  Book.swift
 //  Shoppingmall
 //
 //  Created by mine on 2019/12/05.

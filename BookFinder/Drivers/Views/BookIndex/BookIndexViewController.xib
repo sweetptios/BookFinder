@@ -8,15 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductIndexViewController" customModule="BookFinder" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookIndexViewController" customModule="BookFinder" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="meA-a6-pFx" id="zEA-12-GuH"/>
-                <outlet property="filterView" destination="2Ju-zu-Pb7" id="ml3-B6-ABA"/>
-                <outlet property="filterViewTopConstraint" destination="e4f-TH-Yw8" id="GiY-te-Al9"/>
-                <outlet property="flowLayout" destination="2nA-TM-g2Q" id="yfn-7a-K7b"/>
-                <outlet property="loadingIndicatorView" destination="Msa-A0-q2M" id="h3b-By-a6J"/>
-                <outlet property="searchBarView" destination="83Q-rP-J2t" id="o8X-zo-A2b"/>
-                <outlet property="totalCountLabel" destination="CwX-XX-nUE" id="r5V-Rg-X7g"/>
+                <outlet property="collectionView" destination="meA-a6-pFx" id="cZn-rH-GB9"/>
+                <outlet property="filterView" destination="2Ju-zu-Pb7" id="kQv-0I-FuB"/>
+                <outlet property="filterViewTopConstraint" destination="Jav-qp-2Bb" id="HzV-Ur-W2p"/>
+                <outlet property="flowLayout" destination="2nA-TM-g2Q" id="Rq9-YC-AUQ"/>
+                <outlet property="loadingIndicatorView" destination="Msa-A0-q2M" id="gSu-sf-Kif"/>
+                <outlet property="searchBarView" destination="83Q-rP-J2t" id="DXA-Rx-SS9"/>
+                <outlet property="totalCountLabel" destination="CwX-XX-nUE" id="aQx-YP-bBe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,12 +37,8 @@
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="9tn-ww-L4z"/>
-                                <outlet property="delegate" destination="-1" id="73G-P6-UJr"/>
-                            </connections>
                         </collectionView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ju-zu-Pb7" customClass="ProductIndexFilterView" customModule="BookFinder" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ju-zu-Pb7" customClass="BookIndexFilterView" customModule="BookFinder" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj2-0c-ZKa">
@@ -83,9 +79,6 @@
                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="83Q-rP-J2t">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="idm-Sp-S7y"/>
-                            </connections>
                         </searchBar>
                     </subviews>
                     <constraints>

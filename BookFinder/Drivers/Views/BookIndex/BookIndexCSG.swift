@@ -1,5 +1,5 @@
 //
-//  ProductIndexCSG.swift
+//  BookIndexCSG.swift
 //  Shoppingmall
 //
 //  Created by mine on 2020/01/04.
@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: - CollectionSectionGroup
 
-final class ProductIndexCSG: CollectionSectionGroup {
+final class BookIndexCSG: CollectionSectionGroup {
 
     enum SectionType: Int, CollectionSectionType {
         case product
@@ -27,7 +27,7 @@ final class ProductIndexCSG: CollectionSectionGroup {
 
 //MARK: - CollectionItemViewModel
 
-struct ProductIndexCollectionItemViewData: CollectionItemViewModel {
+struct BookIndexCollectionItemViewData: CollectionItemViewModel {
     private(set) var id: String
     private(set) var thumbnailUrl: URL?
     private(set) var title: String

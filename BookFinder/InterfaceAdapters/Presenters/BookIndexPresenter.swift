@@ -1,5 +1,5 @@
 //
-//  ProductIndexPresenter.swift
+//  BookIndexPresenter.swift
 //  cosmetics
 //
 //  Created by mine on 2020/01/15.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol ProductIndexViewControllable: class {
-    func showProducts(_ products: [ProductIndexCollectionItemViewData])
-    func showProductDetail(id: String, detailInfoUrl: URL?)
+protocol BookIndexViewControllable: class {
+    func showBooks(_ products: [BookIndexCollectionItemViewData])
+    func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: String)
     func alertErrorMessage(title: String, message: String, buttonTitle: String)
@@ -21,34 +21,34 @@ protocol ProductIndexViewControllable: class {
     func scrollToTop()
 }
 
-class ProductIndexPresenter {
-    private weak var view: ProductIndexViewControllable?
+class BookIndexPresenter {
+    private weak var view: BookIndexViewControllable?
 }
 
-extension ProductIndexPresenter {
+extension BookIndexPresenter {
     
-    func setView(_ view: ProductIndexViewControllable) {
+    func setView(_ view: BookIndexViewControllable) {
         self.view = view
     }
 }
 
-extension ProductIndexPresenter: ProductIndexOutputBoundary {
+extension BookIndexPresenter: BookIndexOutputBoundary {
     
-    func showProducts(_ productList: [ProductSummary]) {
+    func showBooks(_ productList: [BookSummary]) {
         #warning("TODO- date 리팩토링")
         #warning("TODO- author 리팩토링")
-        view?.showProducts(productList.map{
+        view?.showBooks(productList.map{
             let displayedDate = $0.publishedDate?.string(format: "yyyy-MM-dd") ?? ""
             var displayedAuthors = $0.authors.first ?? ""
             if $0.authors.count >= 2 {
                 displayedAuthors += "외 \($0.authors.count)명"
             }
-            return ProductIndexCollectionItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: displayedAuthors, publishedDate: displayedDate)
+            return BookIndexCollectionItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: displayedAuthors, publishedDate: displayedDate)
         })
     }
     
-    func showProductDetail(id: String, detailInfoUrl: URL?) {
-        view?.showProductDetail(id: id, detailInfoUrl: detailInfoUrl)
+    func showBookDetail(id: String, detailInfoUrl: URL?) {
+        view?.showBookDetail(id: id, detailInfoUrl: detailInfoUrl)
     }
     
     func showTotalCount(_ count: Int) {

@@ -1,5 +1,5 @@
 //
-//  ProductIndexViewController.swift
+//  BookIndexViewController.swift
 //  Shoppingmall
 //
 //  Created by mine on 2019/12/02.
@@ -8,23 +8,25 @@
 
 import UIKit
 
-class ProductIndexViewController: UIViewController {
+class BookIndexViewController: UIViewController {
 
-    private var inputBoundary: ProductIndexInputBoundary
+    private var inputBoundary: BookIndexInputBoundary
     private var productDetailVCFactory: (String, URL?) -> UIViewController
-    private var csg: ProductIndexCSG
+    private var csg: BookIndexCSG
     
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout?
     @IBOutlet weak var searchBarView: UISearchBar?
     @IBOutlet weak var totalCountLabel: UILabel?
+    #warning("이름 변경")
     @IBOutlet weak var filterView: UIView?
+    #warning("TODO - 삭제 - xib에서도 없애댜함")
     @IBOutlet weak var filterButton: UIButton?
     @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint?
     @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView?
     private var moreRetryVisible: Bool = false
 
-    init(inputBoundary: ProductIndexInputBoundary, csg: ProductIndexCSG, productDetailVCFactory: @escaping (String, URL?) -> UIViewController) {
+    init(inputBoundary: BookIndexInputBoundary, csg: BookIndexCSG, productDetailVCFactory: @escaping (String, URL?) -> UIViewController) {
         self.inputBoundary = inputBoundary
         self.productDetailVCFactory = productDetailVCFactory
         self.csg = csg
@@ -53,7 +55,7 @@ class ProductIndexViewController: UIViewController {
 
 //MARK: - layout
 
-struct ProductIndexLayout {
+struct BookIndexLayout {
     private static let columnCount = 3
     fileprivate static let sectionEdgeInset =  UIEdgeInsets(top: 24, left: 12, bottom: 0, right: 12)
     fileprivate static let minimumLineSpacing: CGFloat = 24
@@ -68,18 +70,21 @@ struct ProductIndexLayout {
     static var textAreaHeight: CGFloat { 91 }
 }
 
-extension ProductIndexViewController {
+extension BookIndexViewController {
     
     fileprivate func setupCollectionView() {
+        collectionView?.dataSource = self
+        collectionView?.delegate = self
         collectionView?.contentInset.top = 50
         collectionView?.showsVerticalScrollIndicator = false
-        collectionView?.register(UINib(nibName: ProductIndexItemCell.className, bundle: nil), forCellWithReuseIdentifier: ProductIndexItemCell.className)
+        collectionView?.register(UINib(nibName: BookIndexItemCell.className, bundle: nil), forCellWithReuseIdentifier: BookIndexItemCell.className)
         collectionView?.register(UINib(nibName: MoreIndicatorView.className, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: MoreIndicatorView.className)
  
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "empty")
     }
     
     fileprivate func setupSearchBar() {
+        searchBarView?.delegate = self
         searchBarView?.backgroundColor = AppColor.c9013FE
         // 13 이상인 경우 텍스트 필드 배경색이 상위뷰의 배경색과 같음. 미만인 경우는 하얀색이라서 13 이상인 경우만 배경색을 바꿔줌
         if #available(iOS 13.0, *) {
@@ -110,7 +115,7 @@ extension ProductIndexViewController {
     }
 }
 
-extension ProductIndexViewController: UIScrollViewDelegate {
+extension BookIndexViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentSize.height > 0 {
@@ -124,15 +129,15 @@ extension ProductIndexViewController: UIScrollViewDelegate {
 
 //MARK: - about UICollectionView
 
-extension ProductIndexViewController: UICollectionViewDelegate {
+extension BookIndexViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        ProductIndexLayout.minimumLineSpacing
+        BookIndexLayout.minimumLineSpacing
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        ProductIndexLayout.minimumInteritemSpacing
+        BookIndexLayout.minimumInteritemSpacing
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        inputBoundary.didSelectProduct(index: indexPath.item)
+        inputBoundary.didSelectBook(index: indexPath.item)
     }
     //footer
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -149,13 +154,13 @@ extension ProductIndexViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             if moreRetryVisible == false {
-                inputBoundary.fetchNextProducts()
+                inputBoundary.fetchNextBooks()
             }
         }
     }
 }
 
-extension ProductIndexViewController: UICollectionViewDataSource {
+extension BookIndexViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         csg.itemCount(at: section)
     }
@@ -171,24 +176,24 @@ extension ProductIndexViewController: UICollectionViewDataSource {
     }
 }
 
-extension ProductIndexViewController: UICollectionViewDelegateFlowLayout {
+extension BookIndexViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        ProductIndexLayout.sectionEdgeInset
+        BookIndexLayout.sectionEdgeInset
     }
     //footer
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         guard csg.itemCount(at: .product) > 0 else { return .zero }
-        return CGSize(width: collectionView.bounds.width, height: ProductIndexLayout.footerHeight)
+        return CGSize(width: collectionView.bounds.width, height: BookIndexLayout.footerHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        ProductIndexLayout.itemSize
+        BookIndexLayout.itemSize
     }
 }
 
 //MARK: - transition animation
 
-extension ProductIndexViewController: UIViewControllerTransitioningDelegate {
+extension BookIndexViewController: UIViewControllerTransitioningDelegate {
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return NicePresentAnimationController()
@@ -201,7 +206,7 @@ extension ProductIndexViewController: UIViewControllerTransitioningDelegate {
 
 //MARK: - UISearchBarDelegate
 
-extension ProductIndexViewController: UISearchBarDelegate {
+extension BookIndexViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         inputBoundary.didSelectKeywordSearch(searchBar.text ?? "")
@@ -213,13 +218,13 @@ extension ProductIndexViewController: UISearchBarDelegate {
     }
 }
 
-//MARK: - IProductIndexView
+//MARK: - IBookIndexView
 
-extension ProductIndexViewController: ProductIndexViewControllable {
+extension BookIndexViewController: BookIndexViewControllable {
     
-    func showProducts(_ products: [ProductIndexCollectionItemViewData]) {
+    func showBooks(_ products: [BookIndexCollectionItemViewData]) {
         let items = products.map {
-            CollectionItem(itemViewData: $0, itemViewType: ProductIndexItemCell.self)
+            CollectionItem(itemViewData: $0, itemViewType: BookIndexItemCell.self)
         }
         csg.addItems(items, at: .product)
         collectionView?.reloadData()
@@ -231,7 +236,7 @@ extension ProductIndexViewController: ProductIndexViewControllable {
         present(alert, animated: true)
     }
     
-    func showProductDetail(id: String, detailInfoUrl: URL?) {
+    func showBookDetail(id: String, detailInfoUrl: URL?) {
         let viewController = productDetailVCFactory(id, detailInfoUrl)
         present(viewController, animated: true, completion: nil)
     }

@@ -1,5 +1,5 @@
 //
-//  ProductIndexFilterView.swift
+//  BookIndexFilterView.swift
 //  cosmetics
 //
 //  Created by mine on 2020/01/08.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ProductIndexFilterView: UIView {
+#warning("TODO - 왜 만들었지?")
+class BookIndexFilterView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -1,5 +1,5 @@
 //
-//  ProductIndexMock.swift
+//  BookIndexMock.swift
 //  ShoppingmallTests
 //
 //  Created by mine on 2019/12/02.
@@ -10,24 +10,24 @@ import Foundation
 import Stubber
 @testable import BookFinder
 
-final class ProductIndexInteractorMock: ProductIndexInputBoundary {
+final class BookIndexInteractorMock: BookIndexInputBoundary {
 
-    init(outputBoundary: ProductIndexOutputBoundary, repository: IBookSummaryRepository) {}
+    init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository) {}
     
     func didRetryOnSeeingMore() {
         Stubber.invoke(didRetryOnSeeingMore, args: Void())
     }
     
-    func fetchNextProducts() {
-        Stubber.invoke(fetchNextProducts, args: ())
+    func fetchNextBooks() {
+        Stubber.invoke(fetchNextBooks, args: ())
     }
     
     func fetchCurrentFilterItem() {
         Stubber.invoke(fetchCurrentFilterItem, args: ())
     }
     
-    func didSelectProduct(index: Int) {
-        Stubber.invoke(didSelectProduct, args: index)
+    func didSelectBook(index: Int) {
+        Stubber.invoke(didSelectBook, args: index)
     }
     
     func viewDidLoad() {
@@ -51,14 +51,14 @@ final class ProductIndexInteractorMock: ProductIndexInputBoundary {
     }
 }
 
-final class ProductIndexOutputBoundaryMock: ProductIndexOutputBoundary {
+final class BookIndexOutputBoundaryMock: BookIndexOutputBoundary {
     
-    func showProducts(_ productList: [ProductSummary]) {
-        Stubber.invoke(showProducts, args: productList)
+    func showBooks(_ productList: [BookSummary]) {
+        Stubber.invoke(showBooks, args: productList)
     }
     
-    func showProductDetail(id: String, detailInfoUrl: URL?) {
-        Stubber.invoke(showProductDetail, args: (id, detailInfoUrl))
+    func showBookDetail(id: String, detailInfoUrl: URL?) {
+        Stubber.invoke(showBookDetail, args: (id, detailInfoUrl))
     }
     
     func showTotalCount(_ count: Int) {
@@ -95,18 +95,18 @@ final class ProductIndexOutputBoundaryMock: ProductIndexOutputBoundary {
     
 }
 
-final class ProductIndexViewMock: ProductIndexViewControllable {
+final class BookIndexViewMock: BookIndexViewControllable {
     
-    func showProducts(_ products: [ProductIndexCollectionItemViewData]) {
-        Stubber.invoke(showProducts, args: products)
+    func showBooks(_ products: [BookIndexCollectionItemViewData]) {
+        Stubber.invoke(showBooks, args: products)
     }
     
     func alertErrorMessage(title: String, message: String, buttonTitle: String) {
         Stubber.invoke(alertErrorMessage, args: (title, message, buttonTitle))
     }
     
-    func showProductDetail(id: String, detailInfoUrl: URL?) {
-        Stubber.invoke(showProductDetail, args: (id, detailInfoUrl))
+    func showBookDetail(id: String, detailInfoUrl: URL?) {
+        Stubber.invoke(showBookDetail, args: (id, detailInfoUrl))
     }
     
     func activateRetryOnSeeingMore() {
@@ -146,7 +146,7 @@ final class ProductIndexViewMock: ProductIndexViewControllable {
     }
 }
 
-final class ProductSummaryRepositoryMock: IBookSummaryRepository {
+final class BookSummaryRepositoryMock: IBookSummaryRepository {
     
     func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         Stubber.invoke(fetchBooks, args: escaping(page, keyword, completion))

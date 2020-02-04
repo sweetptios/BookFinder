@@ -1,5 +1,5 @@
 //
-//  ProductDetailMock.swift
+//  BookDetailMock.swift
 //  BookFinderTests
 //
 //  Created by GOOK HEE JUNG on 2020/02/03.

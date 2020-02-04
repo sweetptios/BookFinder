@@ -1,5 +1,5 @@
 //
-//  ProductDetailCollectionSectionTests.swift
+//  BookDetailCollectionSectionTests.swift
 //  ShoppingmallTests
 //
 //  Created by mine on 2019/12/08.

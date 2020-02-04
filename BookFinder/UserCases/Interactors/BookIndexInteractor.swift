@@ -1,5 +1,5 @@
 //
-//  ProductIndexInteractor.swift
+//  BookIndexInteractor.swift
 //  Shoppingmall
 //
 //  Created by mine on 2019/12/02.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-protocol ProductIndexInputBoundary: class {
-    init(outputBoundary: ProductIndexOutputBoundary, repository: IBookSummaryRepository)
+protocol BookIndexInputBoundary: class {
+    init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository)
     func viewDidLoad()
-    func fetchNextProducts()
+    func fetchNextBooks()
     func didRetryOnSeeingMore()
-    func didSelectProduct(index: Int)
+    func didSelectBook(index: Int)
     func didSelectKeywordSearch(_ keyword: String)
     func didEndEditingSearchKeyword()
 }
 
-protocol ProductIndexOutputBoundary: class {
-    func showProducts(_ productList: [ProductSummary])
-    func showProductDetail(id: String, detailInfoUrl: URL?)
+protocol BookIndexOutputBoundary: class {
+    func showBooks(_ productList: [BookSummary])
+    func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: Int)
     func alertErrorMessage(_ message: String)
@@ -31,9 +31,9 @@ protocol ProductIndexOutputBoundary: class {
     func scrollToTop()
 }
 
-class ProductIndexInteractor {
+class BookIndexInteractor {
     
-    private var outputBoundary: ProductIndexOutputBoundary?
+    private var outputBoundary: BookIndexOutputBoundary?
     private var repository: IBookSummaryRepository
     private var state: State
     
@@ -51,38 +51,38 @@ class ProductIndexInteractor {
         }
     }
     
-    public required init(outputBoundary: ProductIndexOutputBoundary, repository: IBookSummaryRepository) {
+    public required init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository) {
         self.outputBoundary = outputBoundary
         self.repository = repository
         self.state = State()
     }
 }
 
-extension ProductIndexInteractor: ProductIndexInputBoundary {
+extension BookIndexInteractor: BookIndexInputBoundary {
       
     func viewDidLoad() {
         state.keyword = "앱 프로그래밍"
         outputBoundary?.showSearchKeyword(state.keyword)
-        fetchFirstProducts()
+        fetchFirstBooks()
     }
     
-    func didSelectProduct(index: Int) {
+    func didSelectBook(index: Int) {
         if let product = state.products[safe: index] {
-            outputBoundary?.showProductDetail(id: product.id, detailInfoUrl: product.detailInfo)
+            outputBoundary?.showBookDetail(id: product.id, detailInfoUrl: product.detailInfo)
         }
     }
     
-    func fetchNextProducts() {
-        loadProductIndexMore()
+    func fetchNextBooks() {
+        loadBookIndexMore()
     }
     
     func didRetryOnSeeingMore() {
         outputBoundary?.deactivateRetryOnSeeingMore()
-        loadProductIndexMore()
+        loadBookIndexMore()
     }
     
     
-    private func fetchFirstProducts() {
+    private func fetchFirstBooks() {
         let newPage = 1
         outputBoundary?.showLoadingIndicator()
         repository.fetchBooks(page: newPage, keyword: state.keyword) {[weak self] (result) in
@@ -99,21 +99,21 @@ extension ProductIndexInteractor: ProductIndexInputBoundary {
                 self.outputBoundary?.alertErrorMessage(error.localizedDescription)
             }
             print("총 current: ", self.state.totalCount)
-            self.outputBoundary?.showProducts(self.state.products.map{ ProductSummary(from
+            self.outputBoundary?.showBooks(self.state.products.map{ BookSummary(from
             :$0) })
             self.outputBoundary?.showTotalCount(self.state.totalCount)
             self.outputBoundary?.hideLoadingIndicator()
         }
     }
     
-    private func loadProductIndexMore() {
+    private func loadBookIndexMore() {
         repository.fetchBooks(page: state.page + 1, keyword: state.keyword){[weak self](result) in
             guard let self = self else { return }
             switch(result) {
             case let .success(data):
                 self.state.page = self.state.page + 1
                 self.state.products += data.books
-                self.outputBoundary?.showProducts(self.state.products.map{ ProductSummary(from: $0) })
+                self.outputBoundary?.showBooks(self.state.products.map{ BookSummary(from: $0) })
                 self.state.totalCount = data.totalCount
                 self.outputBoundary?.showTotalCount(self.state.totalCount)
             case let .failure(error):
@@ -130,7 +130,7 @@ extension ProductIndexInteractor: ProductIndexInputBoundary {
     
     func didSelectKeywordSearch(_ keyword: String) {
         state.keyword = keyword
-        fetchFirstProducts()
+        fetchFirstBooks()
     }
     
     func didEndEditingSearchKeyword() {
@@ -138,7 +138,7 @@ extension ProductIndexInteractor: ProductIndexInputBoundary {
     }
 }
 
-struct ProductSummary {
+struct BookSummary {
     private(set) var id: String
     private(set) var title: String
     private(set) var authors: [String]

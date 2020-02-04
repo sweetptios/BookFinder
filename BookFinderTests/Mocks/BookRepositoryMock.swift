@@ -1,5 +1,5 @@
 //
-//  ProductRepositoryMock.swift
+//  BookRepositoryMock.swift
 //  ShoppingmallTests
 //
 //  Created by mine on 2020/01/06.

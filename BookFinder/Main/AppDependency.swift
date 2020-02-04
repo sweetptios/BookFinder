@@ -17,10 +17,10 @@ extension AppDependency {
         
         let window = UIWindow()
         
-        let presenter = ProductIndexPresenter()
-        let interactor = ProductIndexInteractor(outputBoundary: presenter, repository: ProductSummaryRepository(networking: NetworkingService()))
-        var rootViewController: ProductIndexViewController!
-        rootViewController = ProductIndexViewController(inputBoundary: interactor, csg: ProductIndexCSG(), productDetailVCFactory: {
+        let presenter = BookIndexPresenter()
+        let interactor = BookIndexInteractor(outputBoundary: presenter, repository: BookSummaryRepository(networking: NetworkingService()))
+        var rootViewController: BookIndexViewController!
+        rootViewController = BookIndexViewController(inputBoundary: interactor, csg: BookIndexCSG(), productDetailVCFactory: {
             let presenter = BookDetailPresenter()
             let interactor = BookDetailInteractor(outputBoundary: presenter, itemId: $0, detailInfoUrl: $1)
             let viewController = BookDetailViewController(inputBoundary: interactor)
