@@ -12,8 +12,7 @@ import Stubber
 
 final class ProductIndexInteractorMock: ProductIndexInputBoundary {
 
-    init(outputBoundary: ProductIndexOutputBoundary, repository: IBookSummaryRepository) {
-    }
+    init(outputBoundary: ProductIndexOutputBoundary, repository: IBookSummaryRepository) {}
     
     func didRetryOnSeeingMore() {
         Stubber.invoke(didRetryOnSeeingMore, args: Void())
@@ -31,8 +30,8 @@ final class ProductIndexInteractorMock: ProductIndexInputBoundary {
         Stubber.invoke(didSelectProduct, args: index)
     }
     
-    func fetchFirstProducts() {
-        Stubber.invoke(fetchFirstProducts, args: ())
+    func viewDidLoad() {
+        Stubber.invoke(viewDidLoad, args: ())
     }
     
     func didSelectKeywordSearch(_ keyword: String) {
@@ -54,14 +53,16 @@ final class ProductIndexInteractorMock: ProductIndexInputBoundary {
 
 final class ProductIndexOutputBoundaryMock: ProductIndexOutputBoundary {
     
-    func setInteractor(_ obj: ProductIndexInputBoundary) {}
-    
-    func loadProducts(_ productList: [ProductSummary]) {
-        Stubber.invoke(loadProducts, args: productList)
+    func showProducts(_ productList: [ProductSummary]) {
+        Stubber.invoke(showProducts, args: productList)
     }
     
-    func showProductDetail(id: String, thumbnailImageUrl: URL?) {
-        Stubber.invoke(showProductDetail, args: (id, thumbnailImageUrl))
+    func showProductDetail(id: String, detailInfoUrl: URL?) {
+        Stubber.invoke(showProductDetail, args: (id, detailInfoUrl))
+    }
+    
+    func showTotalCount(_ count: Int) {
+        Stubber.invoke(showTotalCount, args: count)
     }
     
     func alertErrorMessage(_ message: String) {
@@ -91,11 +92,10 @@ final class ProductIndexOutputBoundaryMock: ProductIndexOutputBoundary {
     func scrollToTop() {
         Stubber.invoke(scrollToTop, args: ())
     }
+    
 }
 
-final class ProductIndexViewMock: IProductIndexView {
-
-    func setPresenter(_ obj: IProductIndexPresenter) {}
+final class ProductIndexViewMock: ProductIndexViewControllable {
     
     func showProducts(_ products: [ProductIndexCollectionItemViewData]) {
         Stubber.invoke(showProducts, args: products)
@@ -105,8 +105,8 @@ final class ProductIndexViewMock: IProductIndexView {
         Stubber.invoke(alertErrorMessage, args: (title, message, buttonTitle))
     }
     
-    func showProductDetail(id: String, thumbnailImageUrl: URL?) {
-        Stubber.invoke(showProductDetail, args: (id, thumbnailImageUrl))
+    func showProductDetail(id: String, detailInfoUrl: URL?) {
+        Stubber.invoke(showProductDetail, args: (id, detailInfoUrl))
     }
     
     func activateRetryOnSeeingMore() {
@@ -140,11 +140,15 @@ final class ProductIndexViewMock: IProductIndexView {
     func scrollToTop() {
         Stubber.invoke(scrollToTop, args: ())
     }
+    
+    func showTotalCount(_ count: String) {
+        Stubber.invoke(showTotalCount, args: count)
+    }
 }
 
 final class ProductSummaryRepositoryMock: IBookSummaryRepository {
     
-    func fetchBooks(page: Int, keyword: String, completion: ((Result<[Book], RepositoryError>) -> Void)?) {
+    func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         Stubber.invoke(fetchBooks, args: escaping(page, keyword, completion))
     }
     

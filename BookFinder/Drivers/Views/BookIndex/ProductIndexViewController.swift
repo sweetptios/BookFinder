@@ -10,20 +10,22 @@ import UIKit
 
 class ProductIndexViewController: UIViewController {
 
-    private var presenter: IProductIndexPresenter?
+    private var inputBoundary: ProductIndexInputBoundary
     private var productDetailVCFactory: (String, URL?) -> UIViewController
     private var csg: ProductIndexCSG
     
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout?
     @IBOutlet weak var searchBarView: UISearchBar?
+    @IBOutlet weak var totalCountLabel: UILabel?
     @IBOutlet weak var filterView: UIView?
     @IBOutlet weak var filterButton: UIButton?
     @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint?
     @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView?
     private var moreRetryVisible: Bool = false
 
-    init(csg: ProductIndexCSG, productDetailVCFactory: @escaping (String, URL?) -> UIViewController) {
+    init(inputBoundary: ProductIndexInputBoundary, csg: ProductIndexCSG, productDetailVCFactory: @escaping (String, URL?) -> UIViewController) {
+        self.inputBoundary = inputBoundary
         self.productDetailVCFactory = productDetailVCFactory
         self.csg = csg
         super.init(nibName: nil, bundle: nil)
@@ -36,7 +38,7 @@ class ProductIndexViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        presenter?.viewDidLoad()
+        inputBoundary.viewDidLoad()
     }
     
     fileprivate func setupViews() {
@@ -52,15 +54,18 @@ class ProductIndexViewController: UIViewController {
 //MARK: - layout
 
 struct ProductIndexLayout {
+    private static let columnCount = 3
     fileprivate static let sectionEdgeInset =  UIEdgeInsets(top: 24, left: 12, bottom: 0, right: 12)
     fileprivate static let minimumLineSpacing: CGFloat = 24
-    fileprivate static let minimumInteritemSpacing: CGFloat = 7
+    fileprivate static let minimumInteritemSpacing: CGFloat = 24
     fileprivate static let footerHeight: CGFloat = 34*2 + 20
-    fileprivate static var horizontalMargin: CGFloat { sectionEdgeInset.left + sectionEdgeInset.right + minimumInteritemSpacing
+    fileprivate static var horizontalMargin: CGFloat { sectionEdgeInset.left + sectionEdgeInset.right + minimumInteritemSpacing*(CGFloat(max(0, columnCount-1))) }
+    fileprivate static var itemSize: CGSize { CGSize(width: Self.thumbnailSize.width, height: Self.thumbnailSize.height + textAreaHeight ) }
+    static var thumbnailSize: CGSize {
+        let width = floor((UIScreen.main.bounds.width - horizontalMargin) / CGFloat(columnCount)); print(width)
+        return CGSize(width: width, height: width / 0.81)
     }
-    fileprivate static var itemSize: CGSize { CGSize(width: ProductIndexLayout.thumbnailWidth, height: ProductIndexLayout.thumbnailWidth + textAreaHeight ) }
-    static var thumbnailWidth: CGFloat { floor((UIScreen.main.bounds.width - horizontalMargin) / 2) }
-    static var textAreaHeight: CGFloat { 67 }
+    static var textAreaHeight: CGFloat { 91 }
 }
 
 extension ProductIndexViewController {
@@ -127,14 +132,14 @@ extension ProductIndexViewController: UICollectionViewDelegate {
         ProductIndexLayout.minimumInteritemSpacing
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.didSelectProduct(index: indexPath.item)
+        inputBoundary.didSelectProduct(index: indexPath.item)
     }
     //footer
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MoreIndicatorView.className, for: indexPath)
         if let view = view as? MoreIndicatorView {
             view.registerRetryAction { [weak self] in
-                self?.presenter?.didRetryOnSeeingMore()
+                self?.inputBoundary.didRetryOnSeeingMore()
             }
             view.activateRetry(moreRetryVisible)
         }
@@ -144,7 +149,7 @@ extension ProductIndexViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             if moreRetryVisible == false {
-                presenter?.didScrollToEnd()
+                inputBoundary.fetchNextProducts()
             }
         }
     }
@@ -199,22 +204,18 @@ extension ProductIndexViewController: UIViewControllerTransitioningDelegate {
 extension ProductIndexViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter?.didSelectKeywordSearch(searchBar.text ?? "")
+        inputBoundary.didSelectKeywordSearch(searchBar.text ?? "")
         searchBar.endEditing(true)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        presenter?.didEndEditingSearchKeyword()
+        inputBoundary.didEndEditingSearchKeyword()
     }
 }
 
 //MARK: - IProductIndexView
 
-extension ProductIndexViewController: IProductIndexView {
-
-    func setPresenter(_ obj: IProductIndexPresenter) {
-        presenter = obj
-    }
+extension ProductIndexViewController: ProductIndexViewControllable {
     
     func showProducts(_ products: [ProductIndexCollectionItemViewData]) {
         let items = products.map {
@@ -230,9 +231,17 @@ extension ProductIndexViewController: IProductIndexView {
         present(alert, animated: true)
     }
     
-    func showProductDetail(id: String, thumbnailImageUrl: URL?) {
-        let viewController = productDetailVCFactory(id, thumbnailImageUrl)
+    func showProductDetail(id: String, detailInfoUrl: URL?) {
+        let viewController = productDetailVCFactory(id, detailInfoUrl)
         present(viewController, animated: true, completion: nil)
+    }
+    
+    func showSearchKeyword(_ keyword: String) {
+        searchBarView?.text = keyword
+    }
+    
+    func showTotalCount(_ count: String) {
+        totalCountLabel?.text = count
     }
     
     func activateRetryOnSeeingMore() {
@@ -251,10 +260,6 @@ extension ProductIndexViewController: IProductIndexView {
     
     func hideLoadingIndicator() {
         loadingIndicatorView?.stopAnimating()
-    }
-    
-    func showSearchKeyword(_ keyword: String) {
-        searchBarView?.text = keyword
     }
     
     func scrollToTop() {

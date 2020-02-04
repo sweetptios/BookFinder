@@ -10,7 +10,7 @@ import Foundation
 
 protocol ProductIndexInputBoundary: class {
     init(outputBoundary: ProductIndexOutputBoundary, repository: IBookSummaryRepository)
-    func fetchFirstProducts()
+    func viewDidLoad()
     func fetchNextProducts()
     func didRetryOnSeeingMore()
     func didSelectProduct(index: Int)
@@ -19,10 +19,10 @@ protocol ProductIndexInputBoundary: class {
 }
 
 protocol ProductIndexOutputBoundary: class {
-    func setInteractor(_ obj: ProductIndexInputBoundary)
-    func loadProducts(_ productList: [ProductSummary])
-    func showProductDetail(id: String, thumbnailImageUrl: URL?)
+    func showProducts(_ productList: [ProductSummary])
+    func showProductDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
+    func showTotalCount(_ count: Int)
     func alertErrorMessage(_ message: String)
     func showLoadingIndicator()
     func hideLoadingIndicator()
@@ -33,7 +33,7 @@ protocol ProductIndexOutputBoundary: class {
 
 class ProductIndexInteractor {
     
-    private weak var outputBoundary: ProductIndexOutputBoundary?
+    private var outputBoundary: ProductIndexOutputBoundary?
     private var repository: IBookSummaryRepository
     private var state: State
     
@@ -41,11 +41,13 @@ class ProductIndexInteractor {
         var page: Int
         var keyword: String
         var products: [Book]
+        var totalCount: Int
         
         init() {
             page = 0
             keyword = ""
             products = []
+            totalCount = 0
         }
     }
     
@@ -57,33 +59,16 @@ class ProductIndexInteractor {
 }
 
 extension ProductIndexInteractor: ProductIndexInputBoundary {
-    
-    func fetchFirstProducts() {
-        let newPage = 1
-        outputBoundary?.showLoadingIndicator()
-        repository.fetchBooks(page: newPage, keyword: state.keyword) {[weak self] (result) in
-            guard let self = self else { return }
-            switch(result) {
-            case let .success(data):
-                self.state.page = newPage
-                self.state.products = data
-                self.outputBoundary?.loadProducts(self.state.products.map{ ProductSummary(from
-                :$0) })
-                self.outputBoundary?.scrollToTop()
-            case let .failure(error):
-                self.state = State()
-                self.outputBoundary?.loadProducts(self.state.products.map{ ProductSummary(from
-                :$0) })
-                self.outputBoundary?.showSearchKeyword(self.state.keyword)
-                self.outputBoundary?.alertErrorMessage(error.localizedDescription)
-            }
-            self.outputBoundary?.hideLoadingIndicator()
-        }
-    }
       
+    func viewDidLoad() {
+        state.keyword = "앱 프로그래밍"
+        outputBoundary?.showSearchKeyword(state.keyword)
+        fetchFirstProducts()
+    }
+    
     func didSelectProduct(index: Int) {
         if let product = state.products[safe: index] {
-            outputBoundary?.showProductDetail(id: product.id, thumbnailImageUrl: product.thumbnailImage)
+            outputBoundary?.showProductDetail(id: product.id, detailInfoUrl: product.detailInfo)
         }
     }
     
@@ -96,18 +81,50 @@ extension ProductIndexInteractor: ProductIndexInputBoundary {
         loadProductIndexMore()
     }
     
+    
+    private func fetchFirstProducts() {
+        let newPage = 1
+        outputBoundary?.showLoadingIndicator()
+        repository.fetchBooks(page: newPage, keyword: state.keyword) {[weak self] (result) in
+            guard let self = self else { return }
+            switch(result) {
+            case let .success(data):
+                self.state.page = newPage
+                self.state.products = data.books
+                self.state.totalCount = data.totalCount
+                self.outputBoundary?.scrollToTop()
+            case let .failure(error):
+                self.state = State()
+                self.outputBoundary?.showSearchKeyword(self.state.keyword)
+                self.outputBoundary?.alertErrorMessage(error.localizedDescription)
+            }
+            print("총 current: ", self.state.totalCount)
+            self.outputBoundary?.showProducts(self.state.products.map{ ProductSummary(from
+            :$0) })
+            self.outputBoundary?.showTotalCount(self.state.totalCount)
+            self.outputBoundary?.hideLoadingIndicator()
+        }
+    }
+    
     private func loadProductIndexMore() {
         repository.fetchBooks(page: state.page + 1, keyword: state.keyword){[weak self](result) in
             guard let self = self else { return }
             switch(result) {
             case let .success(data):
                 self.state.page = self.state.page + 1
-                self.state.products += data
-                self.outputBoundary?.loadProducts(self.state.products.map{ ProductSummary(from: $0) })
+                self.state.products += data.books
+                self.outputBoundary?.showProducts(self.state.products.map{ ProductSummary(from: $0) })
+                self.state.totalCount = data.totalCount
+                self.outputBoundary?.showTotalCount(self.state.totalCount)
             case let .failure(error):
-                self.outputBoundary?.activateRetryOnSeeingMore()
+                if error.kind == .emptySearchResult(keyword: self.state.keyword) {
+                    #warning("TODO - 인디케이터 감추기")
+                } else {
+                    self.outputBoundary?.activateRetryOnSeeingMore()
+                }
                 self.outputBoundary?.alertErrorMessage(error.localizedDescription)
             }
+            print("총 current: ", self.state.totalCount)
         }
     }
     
@@ -124,14 +141,14 @@ extension ProductIndexInteractor: ProductIndexInputBoundary {
 struct ProductSummary {
     private(set) var id: String
     private(set) var title: String
-    private(set) var author: String
+    private(set) var authors: [String]
     private(set) var publishedDate: Date?
     private(set) var thumbnailImage: URL?
     
     init(from source: Book) {
         self.id = source.id
         self.title = source.title
-        self.author = source.authors.first ?? ""
+        self.authors = source.authors
         self.publishedDate = source.publishedDate
         self.thumbnailImage = source.thumbnailImage
     }

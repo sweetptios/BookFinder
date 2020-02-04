@@ -104,7 +104,7 @@ class CollectionSectionGroupTests: XCTestCase {
         let itemA = CollectionItem(itemViewData: CollectionItemEmptyViewModel(), itemViewType: AItemView.self)
         collectionSectionGroup.addItems([itemA], at: indexPath.section)
         // [then]
-    expect(self.collectionSectionGroup.reusableIdentifier(at:indexPath)).to(equal(AItemView.className))
+        expect(self.collectionSectionGroup.reusableIdentifier(at:indexPath)).to(equal(AItemView.className))
     }
     
     func test_SectionType으로도정보를조회할수있다() {

@@ -9,8 +9,8 @@
 import Foundation
 @testable import BookFinder
 
-class ProductSummaryRepositoryStub: IRepositoryStub<[Book]>, IBookSummaryRepository {
-    func fetchBooks(page: Int, keyword: String, completion: ((Result<[Book], RepositoryError>) -> Void)?) {
+class ProductSummaryRepositoryStub: IRepositoryStub<(books: [Book], totalCount: Int)>, IBookSummaryRepository {
+    func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         callCompletion(completion)
     }
 }

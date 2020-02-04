@@ -28,8 +28,8 @@ struct AppFont {
     static let AppleSDGothicNeo_ExtraBold20 = UIFont(name: "AppleSDGothicNeo-ExtraBold", size: 20.0)
     static let AppleSDGothicNeo_Bold14 = UIFont(name: "AppleSDGothicNeo-Bold", size: 14.0)
     static let NotoSansCJKkr_Bold16 = UIFont(name: "NotoSansCJKkr-Bold", size: 16.0)
-    static let NotoSansCJKkr_Bold14 = UIFont(name: "NotoSansCJKkr-Bold", size: 14.0)
     static let NotoSansCJKkr_Bold12 = UIFont(name: "NotoSansCJKkr-Bold", size: 12.0)
     static let NotoSansCJKkr_Black18 = UIFont(name: "NotoSansCJKkr-Black", size: 18.0)
-    static let NotoSansCJKkr_Black14 = UIFont(name: "NotoSansCJKkr-Black", size: 14.0)
+    static let NotoSansCJKkr_Black13 = UIFont(name: "NotoSansCJKkr-Black", size: 13.0)
+    static let NotoSansCJKkr_Bold11 = UIFont(name: "NotoSansCJKkr-Bold", size: 11.0)
 }

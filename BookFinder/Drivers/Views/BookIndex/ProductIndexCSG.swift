@@ -32,5 +32,6 @@ struct ProductIndexCollectionItemViewData: CollectionItemViewModel {
     private(set) var thumbnailUrl: URL?
     private(set) var title: String
     private(set) var author: String
+    private(set) var publishedDate: String
 }
 

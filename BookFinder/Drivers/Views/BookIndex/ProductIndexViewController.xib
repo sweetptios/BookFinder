@@ -16,6 +16,7 @@
                 <outlet property="flowLayout" destination="2nA-TM-g2Q" id="yfn-7a-K7b"/>
                 <outlet property="loadingIndicatorView" destination="Msa-A0-q2M" id="h3b-By-a6J"/>
                 <outlet property="searchBarView" destination="83Q-rP-J2t" id="o8X-zo-A2b"/>
+                <outlet property="totalCountLabel" destination="CwX-XX-nUE" id="r5V-Rg-X7g"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -48,9 +49,17 @@
                                     <rect key="frame" x="311" y="8" width="54" height="34"/>
                                     <state key="normal" title="Button"/>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwX-XX-nUE">
+                                    <rect key="frame" x="8" y="25" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
+                                <constraint firstItem="CwX-XX-nUE" firstAttribute="centerY" secondItem="2Ju-zu-Pb7" secondAttribute="centerY" id="7kG-we-zov"/>
+                                <constraint firstItem="CwX-XX-nUE" firstAttribute="leading" secondItem="2Ju-zu-Pb7" secondAttribute="leading" constant="8" id="9pW-n4-Fsx"/>
                                 <constraint firstAttribute="trailing" secondItem="Dj2-0c-ZKa" secondAttribute="trailing" constant="10" id="fYL-86-yNA"/>
                                 <constraint firstItem="Dj2-0c-ZKa" firstAttribute="centerY" secondItem="2Ju-zu-Pb7" secondAttribute="centerY" id="nzX-Vq-bfr"/>
                                 <constraint firstAttribute="height" constant="50" id="q1j-3a-91a"/>

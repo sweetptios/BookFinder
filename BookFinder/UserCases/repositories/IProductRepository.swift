@@ -9,7 +9,7 @@
 import Foundation
 
 struct RepositoryError: Error {
-    enum ErrorKind {
+    enum ErrorKind: Equatable {
         case unknown
         case emptySearchResult(keyword: String)
         
@@ -35,5 +35,5 @@ struct RepositoryError: Error {
 }
 
 protocol IBookSummaryRepository {
-    func fetchBooks(page: Int, keyword: String, completion: ((Result<[Book],RepositoryError>) -> Void)?)
+    func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book],totalCount: Int),RepositoryError>) -> Void)?)
 }

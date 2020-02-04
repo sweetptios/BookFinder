@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol IProductIndexView: class {
-    func setPresenter(_ obj: IProductIndexPresenter)
+protocol ProductIndexViewControllable: class {
     func showProducts(_ products: [ProductIndexCollectionItemViewData])
-    func showProductDetail(id: String, thumbnailImageUrl: URL?)
+    func showProductDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
+    func showTotalCount(_ count: String)
     func alertErrorMessage(title: String, message: String, buttonTitle: String)
     func deactivateRetryOnSeeingMore()
     func activateRetryOnSeeingMore()
@@ -21,64 +21,38 @@ protocol IProductIndexView: class {
     func scrollToTop()
 }
 
-protocol IProductIndexPresenter: class {
-    func viewDidLoad()
-    func didSelectProduct(index: Int)
-    func didScrollToEnd()
-    func didRetryOnSeeingMore()
-    func didSelectKeywordSearch(_ keyword: String)
-    func didEndEditingSearchKeyword()
-}
-
 class ProductIndexPresenter {
-    
-    private var interactor: ProductIndexInputBoundary?
-    private weak var view: IProductIndexView?
-    
-    init(view: IProductIndexView) {
-        self.view = view
-    }
+    private weak var view: ProductIndexViewControllable?
 }
 
-extension ProductIndexPresenter: IProductIndexPresenter {
-
-    func viewDidLoad() {
-        interactor?.fetchFirstProducts()
-    }
+extension ProductIndexPresenter {
     
-    func didSelectProduct(index: Int) {
-        interactor?.didSelectProduct(index: index)
-    }
-    
-    func didScrollToEnd() {
-        interactor?.fetchNextProducts()
-    }
-    
-    func didRetryOnSeeingMore() {
-        interactor?.didRetryOnSeeingMore()
-    }
-    
-    func didSelectKeywordSearch(_ keyword: String) {
-        interactor?.didSelectKeywordSearch(keyword)
-    }
-    
-    func didEndEditingSearchKeyword() {
-        interactor?.didEndEditingSearchKeyword()
+    func setView(_ view: ProductIndexViewControllable) {
+        self.view = view
     }
 }
 
 extension ProductIndexPresenter: ProductIndexOutputBoundary {
     
-    func setInteractor(_ obj: ProductIndexInputBoundary) {
-        interactor = obj
+    func showProducts(_ productList: [ProductSummary]) {
+        #warning("TODO- date 리팩토링")
+        #warning("TODO- author 리팩토링")
+        view?.showProducts(productList.map{
+            let displayedDate = $0.publishedDate?.string(format: "yyyy-MM-dd") ?? ""
+            var displayedAuthors = $0.authors.first ?? ""
+            if $0.authors.count >= 2 {
+                displayedAuthors += "외 \($0.authors.count)명"
+            }
+            return ProductIndexCollectionItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: displayedAuthors, publishedDate: displayedDate)
+        })
     }
     
-    func loadProducts(_ productList: [ProductSummary]) {
-        view?.showProducts(productList.map{ ProductIndexCollectionItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: $0.author) })
+    func showProductDetail(id: String, detailInfoUrl: URL?) {
+        view?.showProductDetail(id: id, detailInfoUrl: detailInfoUrl)
     }
     
-    func showProductDetail(id: String, thumbnailImageUrl: URL?) {
-        view?.showProductDetail(id: id, thumbnailImageUrl: thumbnailImageUrl)
+    func showTotalCount(_ count: Int) {
+        view?.showTotalCount("Result: (\(count))")
     }
     
     func alertErrorMessage(_ message: String) {
@@ -108,5 +82,6 @@ extension ProductIndexPresenter: ProductIndexOutputBoundary {
     func scrollToTop() {
         view?.scrollToTop()
     }
+    
 }
 
