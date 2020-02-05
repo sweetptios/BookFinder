@@ -20,8 +20,6 @@ class BookIndexViewController: UIViewController {
     @IBOutlet weak var totalCountLabel: UILabel?
     #warning("이름 변경")
     @IBOutlet weak var filterView: UIView?
-    #warning("TODO - 삭제 - xib에서도 없애댜함")
-    @IBOutlet weak var filterButton: UIButton?
     @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint?
     @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView?
     private var moreRetryVisible: Bool = false
@@ -42,7 +40,6 @@ class BookIndexViewController: UIViewController {
         setupViews()
         inputBoundary.viewDidLoad()
     }
-
 }
 
 //MARK: - setup views
@@ -99,6 +96,7 @@ extension BookIndexViewController {
     private func setupFilterView() {
         totalCountLabel?.textColor = AppColor.darkNavy
         totalCountLabel?.font = AppFont.AppleSDGothicNeo_Bold14
+        filterView?.clipsToBounds = false
         filterView?.layer.setShadows(color: AppColor.Background.darkNavyShadow ?? .lightGray, y: 2, blur: 4)
     }
     

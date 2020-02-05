@@ -1,4 +1,7 @@
 {
+  "properties" : {
+    "localizable" : true
+  },
   "info" : {
     "version" : 1,
     "author" : "xcode"
@@ -14,6 +17,19 @@
           "blue" : "0.996",
           "green" : "0.075"
         }
+      }
+    },
+    {
+      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "color" : {
+        "platform" : "osx",
+        "reference" : "systemIndigoColor"
       }
     }
   ]
