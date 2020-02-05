@@ -1,8 +1,8 @@
 //
 //  Layout.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2019/12/14.
+//  Created by mine on 2020/02/01.
 //  Copyright © 2019 sweetpt365. All rights reserved.
 //
 
@@ -24,12 +24,8 @@ struct AppColor {
 }
 
 struct AppFont {
-    static let AppleSDGothicNeo_Heavy32 = UIFont(name: "AppleSDGothicNeo-Heavy", size: 32.0)
-    static let AppleSDGothicNeo_ExtraBold20 = UIFont(name: "AppleSDGothicNeo-ExtraBold", size: 20.0)
-    static let AppleSDGothicNeo_Bold14 = UIFont(name: "AppleSDGothicNeo-Bold", size: 14.0)
-    static let NotoSansCJKkr_Bold16 = UIFont(name: "NotoSansCJKkr-Bold", size: 16.0)
-    static let NotoSansCJKkr_Bold12 = UIFont(name: "NotoSansCJKkr-Bold", size: 12.0)
-    static let NotoSansCJKkr_Black18 = UIFont(name: "NotoSansCJKkr-Black", size: 18.0)
-    static let NotoSansCJKkr_Black13 = UIFont(name: "NotoSansCJKkr-Black", size: 13.0)
-    static let NotoSansCJKkr_Bold11 = UIFont(name: "NotoSansCJKkr-Bold", size: 11.0)
+    static let AppleSDGothicNeo_Bold14 = UIFont(name: "Sen-ExtraBold", size: 15.0)
+    static let NotoSansCJKkr_Bold12 = UIFont(name: "Sen-ExtraBold", size: 13.0)
+    static let NotoSansCJKkr_Black13 = UIFont(name: "Sen-ExtraBold", size: 14.0)
+    static let NotoSansCJKkr_Bold11 = UIFont(name: "Sen-ExtraBold", size: 12.0)
 }

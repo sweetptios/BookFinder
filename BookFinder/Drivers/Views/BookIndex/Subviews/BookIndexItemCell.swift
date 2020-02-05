@@ -1,13 +1,12 @@
 //
 //  BookIndexItemCell.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2019/12/05.
+//  Created by mine on 2020/02/03.
 //  Copyright © 2019 sweetpt365. All rights reserved.
 //
 
 import UIKit
-import Kingfisher
 
 class BookIndexItemCell: UICollectionViewCell, CollectionItemView {
     @IBOutlet weak var thumbnailImageView: UIImageView?
@@ -23,8 +22,7 @@ class BookIndexItemCell: UICollectionViewCell, CollectionItemView {
 
     func configure(_ data: CollectionItemViewModel) {
         if let data = data as? BookIndexCollectionItemViewData {
-            #warning("TODO - 어댑터")
-            thumbnailImageView?.kf.setImage(with: data.thumbnailUrl, placeholder: UIImage(named: "no_cover_thumb"))
+            thumbnailImageView?.loadingImage(with: data.thumbnailUrl, placeholder: UIImage(named: "no_cover_thumb"))
             titleLabel?.text = data.title
             authorsLabel?.text = data.author
             publishedDateLabel?.text = data.publishedDate

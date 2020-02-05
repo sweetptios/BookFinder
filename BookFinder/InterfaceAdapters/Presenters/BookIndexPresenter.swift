@@ -2,7 +2,7 @@
 //  BookIndexPresenter.swift
 //  cosmetics
 //
-//  Created by mine on 2020/01/15.
+//  Created by mine on 2020/02/05.
 //  Copyright © 2020 sweetptdev. All rights reserved.
 //
 
@@ -35,8 +35,7 @@ extension BookIndexPresenter {
 extension BookIndexPresenter: BookIndexOutputBoundary {
     
     func showBooks(_ productList: [BookSummary]) {
-        #warning("TODO- date 리팩토링")
-        #warning("TODO- author 리팩토링")
+        
         view?.showBooks(productList.map{
             let displayedDate = $0.publishedDate?.string(format: "yyyy-MM-dd") ?? ""
             var displayedAuthors = $0.authors.first ?? ""

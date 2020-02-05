@@ -1,8 +1,8 @@
 //
 //  NetworkingService.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2020/01/06.
+//  Created by mine on 2020/02/05.
 //  Copyright © 2020 sweetpt365. All rights reserved.
 //
 
@@ -24,7 +24,6 @@ struct MainDataRequest: IDataRequest {
         let dataRequest = source.responseData { (response) in
             if let data = response.value {
                 if let obj = try? JSONDecoder().decode(ErrorResponseAPIModel.self, from: data), obj.isValid() {
-                    #warning("TODO- 숫자 0이라니..")
                     completion(.failure(ServerAPIResponseError(statusCode: ServerAPIResponseCode(obj.error?.code ?? 0), errorMessage: obj.error?.message)))
                 }
                 else if let obj = try? JSONDecoder().decode(T.self, from: data), obj.isValid() {

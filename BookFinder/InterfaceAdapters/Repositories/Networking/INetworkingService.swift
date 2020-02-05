@@ -1,33 +1,24 @@
 //
 //  INetworkingService.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2020/01/06.
+//  Created by mine on 2020/02/05.
 //  Copyright © 2020 sweetpt365. All rights reserved.
 //
 
 import Foundation
 
-#warning("TODO 이름")
 protocol INetworkingService {
      func request(_ api: ServerAPI, parameters: [String: Any]?) -> IDataRequest?
 }
 
-#warning("TODO 이름")
 protocol IDataRequest {
     @discardableResult func response<T: IServerAPIModel>(_ completion: @escaping (Result<T, ServerAPIResponseError>) -> Void) -> Self
 }
 
-#warning("TODO - 이름 ServerAPIResponseSuccessModel")
 protocol IServerAPIModel: Codable {
     func isValid() -> Bool
 }
-
-#warning("TODO - 이름  ServerAPIResponseErrorModel ")
-//protocol IErrorServerAPIModel: IServerAPIModel {
-//    var code: Int {get set}
-//    var message: String? {get set}
-//}
 
 //MARK: - Server API Response Types
 

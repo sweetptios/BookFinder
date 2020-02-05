@@ -1,8 +1,8 @@
 //
 //  BookIndexViewController.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2019/12/02.
+//  Created by mine on 2020/02/03.
 //  Copyright © 2019 sweetpt365. All rights reserved.
 //
 
@@ -18,9 +18,8 @@ class BookIndexViewController: UIViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout?
     @IBOutlet weak var searchBarView: UISearchBar?
     @IBOutlet weak var totalCountLabel: UILabel?
-    #warning("이름 변경")
-    @IBOutlet weak var filterView: UIView?
-    @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint?
+    @IBOutlet weak var countView: UIView?
+    @IBOutlet weak var countViewTopConstraint: NSLayoutConstraint?
     @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView?
     private var moreRetryVisible: Bool = false
 
@@ -96,8 +95,8 @@ extension BookIndexViewController {
     private func setupFilterView() {
         totalCountLabel?.textColor = AppColor.darkNavy
         totalCountLabel?.font = AppFont.AppleSDGothicNeo_Bold14
-        filterView?.clipsToBounds = false
-        filterView?.layer.setShadows(color: AppColor.Background.darkNavyShadow ?? .lightGray, y: 2, blur: 4)
+        countView?.clipsToBounds = false
+        countView?.layer.setShadows(color: AppColor.Background.darkNavyShadow ?? .lightGray, y: 2, blur: 4)
     }
     
     private func setupLoadingIndicatorView() {
@@ -113,7 +112,7 @@ extension BookIndexViewController: UIScrollViewDelegate {
             let maxY: CGFloat = 0
             let minY: CGFloat = -BookIndexLayout.headerHeight
             let offsetY = -(minY + scrollView.contentOffset.y*0.25)
-            filterViewTopConstraint?.constant = min(maxY, max(minY, offsetY))
+            countViewTopConstraint?.constant = min(maxY, max(minY, offsetY))
         }
     }
 }

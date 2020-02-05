@@ -1,8 +1,8 @@
 //
 //  BookSummaryRepository.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2019/12/03.
+//  Created by mine on 2020/02/01.
 //  Copyright © 2019 sweetpt365. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ class BookSummaryRepository: IBookSummaryRepository {
     
     private let networking: INetworkingService
     #warning("TODO - 의존성 주입? - 화면 구성에 따라 달라질 수 있어야 한다. ")
-    private let maxResultCount: Int = 24
+    private let maxResultCount: Int = 39
     private let apiKey: String = "AIzaSyCdyRfz2EwdpHesMXGGxgsaT37G-NsOy_4"
     private let totalResultCount: Int = 0
 
@@ -46,7 +46,6 @@ class BookSummaryRepository: IBookSummaryRepository {
         params["startIndex"] = (page - 1) * maxResultCount
         params["maxResults"] = maxResultCount
         if keyword.isEmpty == false {
-            #warning("TODO - : 가 인코딩이 되면...검색했을때 검색어와 전혀다른 결과가 나온적이 있었음. 그래서 intitle:을 빼거나 :를 인코딩막거나 해야될지도.")
             params["q"] = keyword
         }
         params["key"] = apiKey
@@ -57,11 +56,7 @@ class BookSummaryRepository: IBookSummaryRepository {
 
 // MARK: - APIModel
 
-import Foundation
-
-// MARK: - Books
 struct BookIndexAPIModel: IServerAPIModel {
-    #warning("TODO - 사용하기")
     let totalItems: Int?
     let items: [Volume]?
     
@@ -94,7 +89,6 @@ extension BookIndexAPIModel {
         return items.map{
             let thumbnailUrl = URL(string: $0.volumeInfo?.imageLinks?.smallThumbnail ?? "")
             let detailUrl = URL(string: $0.volumeInfo?.infoLink ?? "")
-            #warning("TODO - 개선")
             var date = Date(from: $0.volumeInfo?.publishedDate, format: "yyyy-MM-dd")
             if date == nil {
                 date = Date(from: $0.volumeInfo?.publishedDate, format: "yyyy")

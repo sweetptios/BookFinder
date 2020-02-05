@@ -2,7 +2,7 @@
 //  BookIndexPresenterTests.swift
 //  cosmeticsTests
 //
-//  Created by mine on 2020/01/15.
+//  Created by mine on 2020/02/05.
 //  Copyright © 2020 sweetptdev. All rights reserved.
 //
 
@@ -45,7 +45,6 @@ class BookIndexPresenterTests: XCTestCase {
         expect(list[0].publishedDate).to(equal(viewData1.publishedDate))
     }
     
-    #warning("TODO - 이름이 이상하다")
     func test_로딩인디케이터를보여줄수있다() {
         // [given]
         Stubber.register(viewMock.showLoadingIndicator) { _ in }
@@ -89,7 +88,6 @@ class BookIndexPresenterTests: XCTestCase {
         // [given]
         Stubber.register(viewMock.showTotalCount) { _ in }
         let count = 10
-        #warning("TODO - 하드코딩으로 하지 않을 방법이 없을까")
         let countString = "Result: (\(count))"
         // [when]
         presenter.showTotalCount(count)

@@ -11,8 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookIndexViewController" customModule="BookFinder" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="meA-a6-pFx" id="cZn-rH-GB9"/>
-                <outlet property="filterView" destination="2Ju-zu-Pb7" id="kQv-0I-FuB"/>
-                <outlet property="filterViewTopConstraint" destination="e4f-TH-Yw8" id="IKb-uB-GbB"/>
+                <outlet property="countView" destination="2Ju-zu-Pb7" id="kQv-0I-FuB"/>
+                <outlet property="countViewTopConstraint" destination="e4f-TH-Yw8" id="IKb-uB-GbB"/>
                 <outlet property="flowLayout" destination="2nA-TM-g2Q" id="Rq9-YC-AUQ"/>
                 <outlet property="loadingIndicatorView" destination="Msa-A0-q2M" id="gSu-sf-Kif"/>
                 <outlet property="searchBarView" destination="83Q-rP-J2t" id="DXA-Rx-SS9"/>
@@ -38,7 +38,7 @@
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                         </collectionView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ju-zu-Pb7" customClass="BookIndexFilterView" customModule="BookFinder" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ju-zu-Pb7">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwX-XX-nUE">

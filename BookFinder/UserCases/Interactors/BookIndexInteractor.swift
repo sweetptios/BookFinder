@@ -1,8 +1,8 @@
 //
 //  BookIndexInteractor.swift
-//  Shoppingmall
+// BookFinder
 //
-//  Created by mine on 2019/12/02.
+//  Created by mine on 2020/02/01.
 //  Copyright © 2019 sweetpt365. All rights reserved.
 //
 
@@ -115,11 +115,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
                 self.state.totalCount = data.totalCount
                 self.outputBoundary?.showTotalCount(self.state.totalCount)
             case let .failure(error):
-                if error.kind == .emptySearchResult(keyword: self.state.keyword) {
-                    #warning("TODO - 인디케이터 감추기")
-                } else {
-                    self.outputBoundary?.activateRetryOnSeeingMore()
-                }
+                self.outputBoundary?.activateRetryOnSeeingMore()
                 self.outputBoundary?.alertErrorMessage(error.localizedDescription)
             }
         }

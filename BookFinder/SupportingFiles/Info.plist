@@ -56,5 +56,9 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Sen-ExtraBold.otf</string>
+	</array>
 </dict>
 </plist>
