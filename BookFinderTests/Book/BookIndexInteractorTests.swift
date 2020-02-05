@@ -34,7 +34,7 @@ class BookIndexInteractorTests: XCTestCase {
         repositoryStub.setTestData(([],0))
         repositoryStub.setSuccess(true)
         // [when]
-        interactor.viewDidLoad()
+        interactor.viewIsReady()
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.showLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
@@ -54,7 +54,7 @@ class BookIndexInteractorTests: XCTestCase {
         repositoryStub.setSuccess(false)
         let totalCount = 0
         // [when]
-        interactor.viewDidLoad()
+        interactor.viewIsReady()
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(2))
@@ -75,7 +75,7 @@ class BookIndexInteractorTests: XCTestCase {
         let testIndex = testList.count - 1
         repositoryStub.setSuccess(true)
         repositoryStub.setTestData(testResult)
-        interactor.viewDidLoad()
+        interactor.viewIsReady()
         // [when]
         interactor.didSelectBook(index: testIndex)
         // [then]
@@ -92,13 +92,13 @@ class BookIndexInteractorTests: XCTestCase {
         let testResult1 = ([testObj1], 10)
         repositoryStub.setSuccess(true)
         repositoryStub.setTestData(testResult1)
-        interactor.viewDidLoad()
+        interactor.viewIsReady()
         let testObj2 = Book(id: "b", thumbnailImage: URL(string: "https://test2.com"))
         let testResult2 = ([testObj2], 10)
         repositoryStub.setSuccess(true)
         repositoryStub.setTestData(testResult2)
         // [when]
-        interactor.fetchNextBooks()
+        interactor.didSelectSeeingMore()
         // [then]
         let f = Stubber.executions(self.outputBoundaryMock.showBooks)
         let secondCall = 1
@@ -114,7 +114,7 @@ class BookIndexInteractorTests: XCTestCase {
         Stubber.register(outputBoundaryMock.alertErrorMessage) { _ in }
         repositoryStub.setSuccess(false)
         // [when]
-        interactor.fetchNextBooks()
+        interactor.didSelectSeeingMore()
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.activateRetryOnSeeingMore).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.alertErrorMessage).count).to(equal(1))

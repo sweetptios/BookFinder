@@ -37,7 +37,7 @@ class BookIndexViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        inputBoundary.viewDidLoad()
+        inputBoundary.viewIsReady()
     }
 }
 
@@ -144,7 +144,7 @@ extension BookIndexViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             if moreRetryVisible == false {
-                inputBoundary.fetchNextBooks()
+                inputBoundary.didSelectSeeingMore()
             }
         }
     }

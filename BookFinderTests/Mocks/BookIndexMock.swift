@@ -15,11 +15,11 @@ final class BookIndexInteractorMock: BookIndexInputBoundary {
     init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository) {}
     
     func didRetryOnSeeingMore() {
-        Stubber.invoke(didRetryOnSeeingMore, args: Void())
+        Stubber.invoke(didRetryOnSeeingMore, args: ())
     }
     
-    func fetchNextBooks() {
-        Stubber.invoke(fetchNextBooks, args: ())
+    func didSelectSeeingMore() {
+        Stubber.invoke(didSelectSeeingMore, args: ())
     }
     
     func fetchCurrentFilterItem() {
@@ -30,8 +30,8 @@ final class BookIndexInteractorMock: BookIndexInputBoundary {
         Stubber.invoke(didSelectBook, args: index)
     }
     
-    func viewDidLoad() {
-        Stubber.invoke(viewDidLoad, args: ())
+    func viewIsReady() {
+        Stubber.invoke(viewIsReady, args: ())
     }
     
     func didSelectKeywordSearch(_ keyword: String) {

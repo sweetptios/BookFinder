@@ -10,8 +10,8 @@ import Foundation
 
 protocol BookIndexInputBoundary: class {
     init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository)
-    func viewDidLoad()
-    func fetchNextBooks()
+    func viewIsReady()
+    func didSelectSeeingMore()
     func didRetryOnSeeingMore()
     func didSelectBook(index: Int)
     func didSelectKeywordSearch(_ keyword: String)
@@ -60,7 +60,7 @@ class BookIndexInteractor {
 
 extension BookIndexInteractor: BookIndexInputBoundary {
       
-    func viewDidLoad() {
+    func viewIsReady() {
         state.keyword = "힐링"
         outputBoundary?.showSearchKeyword(state.keyword)
         fetchFirstBooks()
@@ -72,7 +72,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
         }
     }
     
-    func fetchNextBooks() {
+    func didSelectSeeingMore() {
         loadBooksMore()
     }
     
