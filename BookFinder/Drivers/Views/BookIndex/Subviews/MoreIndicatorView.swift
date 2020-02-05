@@ -32,7 +32,7 @@ class MoreIndicatorView: UICollectionReusableView {
             let tintableImage = myImage.withRenderingMode(.alwaysTemplate)
             indicator?.image = tintableImage
         }
-        indicator?.tintColor = AppColor.cABABC4
+        indicator?.tintColor = AppColor.gray
         let animations = CAKeyframeAnimation(keyPath: "transform.rotation.z")
         animations.repeatCount = .infinity
         animations.beginTime = CACurrentMediaTime() + 0.5
@@ -53,7 +53,7 @@ class MoreIndicatorView: UICollectionReusableView {
     
     private func setupRetry() {
         retryButton?.setTitle("재시도", for: .normal)
-        retryButton?.setTitleColor(AppColor.cABABC4, for: .normal)
+        retryButton?.setTitleColor(AppColor.gray, for: .normal)
         retryButton?.addTarget(self, action: #selector(didTappedRetryButton), for: .touchUpInside)
     }
     

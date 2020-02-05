@@ -13,14 +13,14 @@ import UIKit
 final class BookIndexCSG: CollectionSectionGroup {
 
     enum SectionType: Int, CollectionSectionType {
-        case product
+        case book
     }
     
     var sections: [CollectionSection<SectionType>]
     
     init() {
         sections = [
-            CollectionSection(type: .product, items: [])
+            CollectionSection(type: .book, items: [])
         ]
     }
 }

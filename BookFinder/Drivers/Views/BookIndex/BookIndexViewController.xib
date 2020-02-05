@@ -12,7 +12,7 @@
             <connections>
                 <outlet property="collectionView" destination="meA-a6-pFx" id="cZn-rH-GB9"/>
                 <outlet property="filterView" destination="2Ju-zu-Pb7" id="kQv-0I-FuB"/>
-                <outlet property="filterViewTopConstraint" destination="Jav-qp-2Bb" id="HzV-Ur-W2p"/>
+                <outlet property="filterViewTopConstraint" destination="e4f-TH-Yw8" id="IKb-uB-GbB"/>
                 <outlet property="flowLayout" destination="2nA-TM-g2Q" id="Rq9-YC-AUQ"/>
                 <outlet property="loadingIndicatorView" destination="Msa-A0-q2M" id="gSu-sf-Kif"/>
                 <outlet property="searchBarView" destination="83Q-rP-J2t" id="DXA-Rx-SS9"/>

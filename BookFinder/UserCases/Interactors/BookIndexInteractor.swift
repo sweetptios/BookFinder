@@ -61,7 +61,7 @@ class BookIndexInteractor {
 extension BookIndexInteractor: BookIndexInputBoundary {
       
     func viewDidLoad() {
-        state.keyword = "앱 프로그래밍"
+        state.keyword = "힐링"
         outputBoundary?.showSearchKeyword(state.keyword)
         fetchFirstBooks()
     }
@@ -73,14 +73,13 @@ extension BookIndexInteractor: BookIndexInputBoundary {
     }
     
     func fetchNextBooks() {
-        loadBookIndexMore()
+        loadBooksMore()
     }
     
     func didRetryOnSeeingMore() {
         outputBoundary?.deactivateRetryOnSeeingMore()
-        loadBookIndexMore()
+        loadBooksMore()
     }
-    
     
     private func fetchFirstBooks() {
         let newPage = 1
@@ -98,7 +97,6 @@ extension BookIndexInteractor: BookIndexInputBoundary {
                 self.outputBoundary?.showSearchKeyword(self.state.keyword)
                 self.outputBoundary?.alertErrorMessage(error.localizedDescription)
             }
-            print("총 current: ", self.state.totalCount)
             self.outputBoundary?.showBooks(self.state.products.map{ BookSummary(from
             :$0) })
             self.outputBoundary?.showTotalCount(self.state.totalCount)
@@ -106,7 +104,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
         }
     }
     
-    private func loadBookIndexMore() {
+    private func loadBooksMore() {
         repository.fetchBooks(page: state.page + 1, keyword: state.keyword){[weak self](result) in
             guard let self = self else { return }
             switch(result) {
@@ -124,7 +122,6 @@ extension BookIndexInteractor: BookIndexInputBoundary {
                 }
                 self.outputBoundary?.alertErrorMessage(error.localizedDescription)
             }
-            print("총 current: ", self.state.totalCount)
         }
     }
     

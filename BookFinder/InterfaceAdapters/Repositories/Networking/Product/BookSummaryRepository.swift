@@ -33,7 +33,6 @@ class BookSummaryRepository: IBookSummaryRepository {
                         } else {
                             completion?(.success((books: data.toBooks(), totalCount: data.totalItems ?? 0)))
                         }
-                        print("책개수: ", data.totalItems ?? 0, " current: ", data.items?.count ?? 0)
                     case .failure(let error):
                          completion?(.failure(error.toRepositoryError()))
                 }

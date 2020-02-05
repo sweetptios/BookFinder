@@ -12,14 +12,46 @@ import Stubber
 
 class BookDetailOutputBoundaryMock: BookDetailOutputBoundary {
     
-    func showBookDetail(_ url: URL?) {
-        Stubber.invoke(showBookDetail, args: url)
+    func goToWebPage(_ url: URL) {
+        Stubber.invoke(goToWebPage, args: url)
+    }
+    
+    func goBackToPrevWebPage() {
+        Stubber.invoke(goBackToPrevWebPage, args: ())
+    }
+    
+    func goForwardToNextWebPage() {
+        Stubber.invoke(goForwardToNextWebPage, args: ())
+    }
+    
+    func reloadWebPage() {
+        Stubber.invoke(reloadWebPage, args: ())
+    }
+    
+    func exit() {
+        Stubber.invoke(exit, args: ())
     }
 }
 
 class BookDetailViewMock: BookDetailViewControllable {
     
-    func showBookDetail(_ url: URL?) {
-        Stubber.invoke(showBookDetail, args: url)
+    func goBackToPrevWebPage() {
+        Stubber.invoke(goBackToPrevWebPage, args: ())
+    }
+    
+    func goForwardToNextWebPage() {
+        Stubber.invoke(goForwardToNextWebPage, args: ())
+    }
+    
+    func reloadWebPage() {
+        Stubber.invoke(reloadWebPage, args: ())
+    }
+    
+    func loadWebPage(_ url: URL) {
+        Stubber.invoke(loadWebPage, args: url)
+    }
+    
+    func exit() {
+        Stubber.invoke(exit, args: ())
     }
 }

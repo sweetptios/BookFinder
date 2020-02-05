@@ -24,9 +24,11 @@ extension AppDependency {
             let presenter = BookDetailPresenter()
             let interactor = BookDetailInteractor(outputBoundary: presenter, itemId: $0, detailInfoUrl: $1)
             let viewController = BookDetailViewController(inputBoundary: interactor)
-            viewController.transitioningDelegate = rootViewController
             presenter.setView(viewController)
-            return viewController
+            let navigationController = UINavigationController(rootViewController: viewController)
+            navigationController.transitioningDelegate = rootViewController
+            navigationController.presentationController?.delegate = viewController
+            return navigationController
         })
         presenter.setView(rootViewController)
         window.rootViewController = rootViewController

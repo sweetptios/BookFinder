@@ -42,18 +42,10 @@ class BookIndexViewController: UIViewController {
         setupViews()
         inputBoundary.viewDidLoad()
     }
-    
-    fileprivate func setupViews() {
-        view.backgroundColor = AppColor.c9013FE
-        setupCollectionView()
-        setupSearchBar()
-        setupFilterView()
-        setupFilterButton()
-        setupLoadingIndicatorView()
-    }
+
 }
 
-//MARK: - layout
+//MARK: - setup views
 
 struct BookIndexLayout {
     private static let columnCount = 3
@@ -61,10 +53,11 @@ struct BookIndexLayout {
     fileprivate static let minimumLineSpacing: CGFloat = 24
     fileprivate static let minimumInteritemSpacing: CGFloat = 24
     fileprivate static let footerHeight: CGFloat = 34*2 + 20
+    fileprivate static let headerHeight: CGFloat = 50
     fileprivate static var horizontalMargin: CGFloat { sectionEdgeInset.left + sectionEdgeInset.right + minimumInteritemSpacing*(CGFloat(max(0, columnCount-1))) }
     fileprivate static var itemSize: CGSize { CGSize(width: Self.thumbnailSize.width, height: Self.thumbnailSize.height + textAreaHeight ) }
     static var thumbnailSize: CGSize {
-        let width = floor((UIScreen.main.bounds.width - horizontalMargin) / CGFloat(columnCount)); print(width)
+        let width = floor((UIScreen.main.bounds.width - horizontalMargin) / CGFloat(columnCount))
         return CGSize(width: width, height: width / 0.81)
     }
     static var textAreaHeight: CGFloat { 91 }
@@ -72,10 +65,18 @@ struct BookIndexLayout {
 
 extension BookIndexViewController {
     
-    fileprivate func setupCollectionView() {
+    fileprivate func setupViews() {
+        view.backgroundColor = AppColor.Background.purple
+        setupCollectionView()
+        setupSearchBar()
+        setupFilterView()
+        setupLoadingIndicatorView()
+    }
+    
+    private func setupCollectionView() {
         collectionView?.dataSource = self
         collectionView?.delegate = self
-        collectionView?.contentInset.top = 50
+        collectionView?.contentInset.top = BookIndexLayout.headerHeight
         collectionView?.showsVerticalScrollIndicator = false
         collectionView?.register(UINib(nibName: BookIndexItemCell.className, bundle: nil), forCellWithReuseIdentifier: BookIndexItemCell.className)
         collectionView?.register(UINib(nibName: MoreIndicatorView.className, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: MoreIndicatorView.className)
@@ -83,33 +84,25 @@ extension BookIndexViewController {
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "empty")
     }
     
-    fileprivate func setupSearchBar() {
+    private func setupSearchBar() {
         searchBarView?.delegate = self
-        searchBarView?.backgroundColor = AppColor.c9013FE
+        searchBarView?.barTintColor = AppColor.Background.purple
+        searchBarView?.backgroundColor = AppColor.Background.purple
         // 13 이상인 경우 텍스트 필드 배경색이 상위뷰의 배경색과 같음. 미만인 경우는 하얀색이라서 13 이상인 경우만 배경색을 바꿔줌
         if #available(iOS 13.0, *) {
-            searchBarView?.searchTextField.backgroundColor = AppColor.cFFFFFF
+            searchBarView?.searchTextField.backgroundColor = AppColor.Background.white
         }
         searchBarView?.placeholder = "읽고싶은 책을 찾아보세요"
         searchBarView?.backgroundImage = UIImage()
     }
     
-    fileprivate func setupFilterView() {
-        filterView?.layer.setShadows(color: AppColor.c33_47_62_01 ?? .lightGray, y: 1)
+    private func setupFilterView() {
+        totalCountLabel?.textColor = AppColor.darkNavy
+        totalCountLabel?.font = AppFont.AppleSDGothicNeo_Bold14
+        filterView?.layer.setShadows(color: AppColor.Background.darkNavyShadow ?? .lightGray, y: 2, blur: 4)
     }
     
-    fileprivate func setupFilterButton() {
-        filterButton?.titleLabel?.font = AppFont.AppleSDGothicNeo_Bold14
-        filterButton?.setTitleColor(AppColor.c000000, for: .normal)
-        filterButton?.setTitleColor(AppColor.c000000, for: .selected)
-        filterButton?.setImage(UIImage(named: "keyboard_arrow_down-24px"), for: .normal)
-        filterButton?.setImage(UIImage(named: "keyboard_arrow_up-24px"), for: .selected)
-        filterButton?.imageView?.tintColor = AppColor.c000000
-        filterButton?.adjustsImageWhenHighlighted = false
-        filterButton?.semanticContentAttribute = .forceRightToLeft
-    }
-    
-    fileprivate func setupLoadingIndicatorView() {
+    private func setupLoadingIndicatorView() {
         loadingIndicatorView?.stopAnimating()
         loadingIndicatorView?.hidesWhenStopped = true
     }
@@ -120,7 +113,7 @@ extension BookIndexViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentSize.height > 0 {
             let maxY: CGFloat = 0
-            let minY: CGFloat = -50
+            let minY: CGFloat = -BookIndexLayout.headerHeight
             let offsetY = -(minY + scrollView.contentOffset.y*0.25)
             filterViewTopConstraint?.constant = min(maxY, max(minY, offsetY))
         }
@@ -182,7 +175,7 @@ extension BookIndexViewController: UICollectionViewDelegateFlowLayout {
     }
     //footer
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        guard csg.itemCount(at: .product) > 0 else { return .zero }
+        guard csg.itemCount(at: .book) > 0 else { return .zero }
         return CGSize(width: collectionView.bounds.width, height: BookIndexLayout.footerHeight)
     }
     
@@ -226,7 +219,7 @@ extension BookIndexViewController: BookIndexViewControllable {
         let items = products.map {
             CollectionItem(itemViewData: $0, itemViewType: BookIndexItemCell.self)
         }
-        csg.addItems(items, at: .product)
+        csg.addItems(items, at: .book)
         collectionView?.reloadData()
     }
     
@@ -268,6 +261,9 @@ extension BookIndexViewController: BookIndexViewControllable {
     }
     
     func scrollToTop() {
-        collectionView?.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        // 로드된 셀이 없을 때 호출되면 invalid IndexPath warning 발생하는 문제 해결
+        if csg.itemCount(at:.book) > 0 {
+            collectionView?.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        }
     }
 }

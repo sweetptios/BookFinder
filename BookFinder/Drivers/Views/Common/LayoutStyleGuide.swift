@@ -9,18 +9,18 @@
 import UIKit
 
 struct AppColor {
-    static let cFFFFFF = UIColor.white
-    static let c000000 = UIColor.black
-    static let c24_24_40_016 = UIColor(named: "24_24_40_016")
-    static let c24_24_80_008 = UIColor(named: "24_24_80_008")
-    static let c24_24_80_004 = UIColor(named: "24_24_80_004")
-    static let c33_47_62_01 = UIColor(named: "33_47_62_01")
-    static let c141428 = UIColor(named: "141428")
-    static let c9013FE = UIColor(named: "9013FE")
-    static let cECECF5 = UIColor(named: "ECECF5")
-    static let cA3A3B5 = UIColor(named: "A3A3B5")
-    static let cF6F6FA = UIColor(named: "F6F6FA")
-    static let cABABC4 = UIColor(named: "ABABC4")
+    
+    struct Background {
+        static let white = UIColor(named: "whitebg")
+        static let black = UIColor(named: "blackbg")
+        static let darkNavyShadow = UIColor(named: "darkNavyShadow")
+        static let purple = UIColor(named: "purplebg")
+    }
+    static let white = UIColor(named: "white")
+    static let black = UIColor(named: "black")
+    static let darkNavy = UIColor(named: "darkNavy")
+    static let lightGray = UIColor(named: "lightGray")
+    static let gray = UIColor(named: "gray")
 }
 
 struct AppFont {

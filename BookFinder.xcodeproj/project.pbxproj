@@ -22,8 +22,6 @@
 		3BE8662D23E536D4007C8E5D /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865F023E536D4007C8E5D /* Array+.swift */; };
 		3BE8662E23E536D4007C8E5D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865F123E536D4007C8E5D /* UIView+.swift */; };
 		3BE8663A23E536D4007C8E5D /* LayoutStyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8660123E536D4007C8E5D /* LayoutStyleGuide.swift */; };
-		3BE8663B23E536D4007C8E5D /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8660323E536D4007C8E5D /* ConfirmView.swift */; };
-		3BE8663C23E536D4007C8E5D /* ConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BE8660423E536D4007C8E5D /* ConfirmView.xib */; };
 		3BE8663D23E536D4007C8E5D /* CollectionSectionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8660523E536D4007C8E5D /* CollectionSectionGroup.swift */; };
 		3BE8663E23E536D4007C8E5D /* NiceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8660723E536D4007C8E5D /* NiceAnimationController.swift */; };
 		3BE8663F23E536D4007C8E5D /* BookIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8660823E536D4007C8E5D /* BookIndexViewController.swift */; };
@@ -53,6 +51,7 @@
 		3BE8666B23E53863007C8E5D /* BookRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8665E23E53863007C8E5D /* BookRepositoryMock.swift */; };
 		3BE8666C23E53863007C8E5D /* BookIndexMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8665F23E53863007C8E5D /* BookIndexMock.swift */; };
 		3BE8666E23E557DC007C8E5D /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865E823E536D4007C8E5D /* Book.swift */; };
+		6633C5BF23E97B0500D8A74C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6633C5BE23E97B0500D8A74C /* WebKit.framework */; };
 		668D59D823E828A200E5B654 /* BookDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D59D523E828A200E5B654 /* BookDetailPresenter.swift */; };
 		668D59DA23E828A200E5B654 /* BookDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D59D723E828A200E5B654 /* BookDetailInteractor.swift */; };
 		668D59E323E833E400E5B654 /* BookDetailInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D59E223E833E400E5B654 /* BookDetailInteractorTests.swift */; };
@@ -108,8 +107,6 @@
 		3BE865F023E536D4007C8E5D /* Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		3BE865F123E536D4007C8E5D /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		3BE8660123E536D4007C8E5D /* LayoutStyleGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutStyleGuide.swift; sourceTree = "<group>"; };
-		3BE8660323E536D4007C8E5D /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
-		3BE8660423E536D4007C8E5D /* ConfirmView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmView.xib; sourceTree = "<group>"; };
 		3BE8660523E536D4007C8E5D /* CollectionSectionGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSectionGroup.swift; sourceTree = "<group>"; };
 		3BE8660723E536D4007C8E5D /* NiceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiceAnimationController.swift; sourceTree = "<group>"; };
 		3BE8660823E536D4007C8E5D /* BookIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookIndexViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +137,7 @@
 		3BE8665F23E53863007C8E5D /* BookIndexMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookIndexMock.swift; sourceTree = "<group>"; };
 		54BCE8C2A8060226F64AA8D9 /* Pods_BookFinderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookFinderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B65EC38D4796B566F34372F /* Pods-BookFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookFinder.debug.xcconfig"; path = "Target Support Files/Pods-BookFinder/Pods-BookFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		6633C5BE23E97B0500D8A74C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		668D59D523E828A200E5B654 /* BookDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailPresenter.swift; sourceTree = "<group>"; };
 		668D59D723E828A200E5B654 /* BookDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailInteractor.swift; sourceTree = "<group>"; };
 		668D59E223E833E400E5B654 /* BookDetailInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailInteractorTests.swift; sourceTree = "<group>"; };
@@ -160,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6633C5BF23E97B0500D8A74C /* WebKit.framework in Frameworks */,
 				9992563D0107A9DF6CD5E7FC /* Pods_BookFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +185,7 @@
 		1816728A314C02F0DBA1F52C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6633C5BE23E97B0500D8A74C /* WebKit.framework */,
 				E7A0CAF2AF39F746A4577DC2 /* Pods_BookFinder.framework */,
 				D65252E7A7450FF8198250C2 /* Pods_BookFinder_BookFinderUITests.framework */,
 				54BCE8C2A8060226F64AA8D9 /* Pods_BookFinderTests.framework */,
@@ -370,20 +370,10 @@
 		3BE8660023E536D4007C8E5D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3BE8660223E536D4007C8E5D /* ConfirmView */,
 				3BE8660123E536D4007C8E5D /* LayoutStyleGuide.swift */,
 				3BE8660523E536D4007C8E5D /* CollectionSectionGroup.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		3BE8660223E536D4007C8E5D /* ConfirmView */ = {
-			isa = PBXGroup;
-			children = (
-				3BE8660323E536D4007C8E5D /* ConfirmView.swift */,
-				3BE8660423E536D4007C8E5D /* ConfirmView.xib */,
-			);
-			path = ConfirmView;
 			sourceTree = "<group>";
 		};
 		3BE8660623E536D4007C8E5D /* BookIndex */ = {
@@ -631,7 +621,6 @@
 				3BE8664023E536D4007C8E5D /* MoreIndicatorView.xib in Resources */,
 				3BE8664E23E536D4007C8E5D /* LaunchScreen.storyboard in Resources */,
 				3BE8664523E536D4007C8E5D /* BookIndexViewController.xib in Resources */,
-				3BE8663C23E536D4007C8E5D /* ConfirmView.xib in Resources */,
 				3BE8664923E536D4007C8E5D /* Sen-ExtraBold.otf in Resources */,
 				3BE8664B23E536D4007C8E5D /* NotoSansCJKkr-Bold.otf in Resources */,
 				3BE8664823E536D4007C8E5D /* AppleSDGothicNeo.ttc in Resources */,
@@ -794,7 +783,6 @@
 				3BE8661E23E536D4007C8E5D /* INetworkingService.swift in Sources */,
 				3BE8663E23E536D4007C8E5D /* NiceAnimationController.swift in Sources */,
 				3BE8662E23E536D4007C8E5D /* UIView+.swift in Sources */,
-				3BE8663B23E536D4007C8E5D /* ConfirmView.swift in Sources */,
 				3BE8662523E536D4007C8E5D /* IProductRepository.swift in Sources */,
 				3BE8664223E536D4007C8E5D /* BookIndexItemCell.swift in Sources */,
 				3BE8664123E536D4007C8E5D /* BookIndexFilterView.swift in Sources */,

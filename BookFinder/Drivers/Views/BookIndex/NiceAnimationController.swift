@@ -8,26 +8,30 @@
 
 import UIKit
 
+#warning("TODO - blackview 어떠게 할지")
 let blackViewTag: Int = 100
 
 class NiceDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.2 }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.3 }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
         guard let fromVC = transitionContext.viewController(forKey: .from) else { return }
         
-        let blackView = transitionContext.containerView.viewWithTag(blackViewTag)
+        //let blackView = transitionContext.containerView.viewWithTag(blackViewTag)
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext),
                        delay: 0,
                        options: .curveEaseIn,
                        animations: {
                             fromVC.view.transform = CGAffineTransform(translationX: 0, y: fromVC.view.bounds.height)
-                            blackView?.backgroundColor = .clear }
+                            //blackView?.backgroundColor = .clear
+                        }
                       ) { _ in
-                            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                                
+                       // blackView?.removeFromSuperview()
+                        transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                       }
     }
 }
@@ -48,7 +52,7 @@ class NicePresentAnimationController: NSObject, UIViewControllerAnimatedTransiti
             view.backgroundColor = .clear
             return view
         }()
-        containerView.addSubview(blackView)
+        //containerView.addSubview(blackView)
         containerView.addSubview(toView)
         
         toView.frame = finalFrame
@@ -59,7 +63,7 @@ class NicePresentAnimationController: NSObject, UIViewControllerAnimatedTransiti
                        initialSpringVelocity: 0,
                        options: .curveEaseOut,
                        animations: {
-                            blackView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+                        blackView.backgroundColor = AppColor.Background.black!.withAlphaComponent(0.7)
                             toView.transform = CGAffineTransform.identity }
                       ) { _ in
                             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

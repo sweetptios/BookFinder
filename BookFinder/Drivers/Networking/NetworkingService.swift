@@ -49,20 +49,20 @@ struct NetworkingService: INetworkingService {
             .response { (response) in
                 guard let request = response.request else { return }
                 let urlString = request.url?.absoluteString ?? "unknown"
-                let params = parameters != nil ? "params = \(String(describing: parameters!))" : ""
+                let params = parameters != nil ? "\n params= \(String(describing: parameters!))" : ""
                 var log: String = ""
                 if let error = response.error  {
-                    log = String(format:"\nHTTP Response Error= %d %@ URL= %@ %@)",
+                    log = String(format:"HTTP Response Error= %d %@ \n URL= %@ %@)",
                                  (error as NSError).code,
                                  error.localizedDescription,
                                  urlString,
                                  params)
                 } else {
-                    log = String(format:"HTTP Response Success URL= %@ %@",
+                    log = String(format:"HTTP Response Success \n URL= %@ %@",
                                  urlString,
                                 params)
                 }
-                debugPrint(log)
+                print(log)
         }
         
         return MainDataRequest(source: dataRequest)

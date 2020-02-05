@@ -12,10 +12,19 @@ import Foundation
 protocol BookDetailInputBoundary: class {
     init(outputBoundary: BookDetailOutputBoundary, itemId: String, detailInfoUrl: URL?)
     func viewDidLoad()
+    func didSelectBack()
+    func didSelectForward()
+    func didSelectReload()
+    func didSelectHome()
+    func didSelectClose()
 }
 
 protocol BookDetailOutputBoundary: class {
-    func showBookDetail(_ url: URL?)
+    func goToWebPage(_ url: URL)
+    func goBackToPrevWebPage()
+    func goForwardToNextWebPage()
+    func reloadWebPage()
+    func exit()
 }
 
 class BookDetailInteractor {
@@ -32,8 +41,32 @@ class BookDetailInteractor {
 }
 
 extension BookDetailInteractor: BookDetailInputBoundary {
-    
+
     func viewDidLoad() {
-        outputBoundary.showBookDetail(detailInfoUrl)
+        if let url = detailInfoUrl {
+            outputBoundary.goToWebPage(url)
+        }
+    }
+    
+    func didSelectBack() {
+        outputBoundary.goBackToPrevWebPage()
+    }
+    
+    func didSelectForward() {
+        outputBoundary.goForwardToNextWebPage()
+    }
+    
+    func didSelectReload() {
+        outputBoundary.reloadWebPage()
+    }
+    
+    func didSelectHome() {
+        if let url = detailInfoUrl {
+            outputBoundary.goToWebPage(url)
+        }
+    }
+    
+    func didSelectClose() {
+        outputBoundary.exit()
     }
 }

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookDetailViewController" customModule="BookFinder" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="wRj-Gq-8Zx" id="ztS-tx-oPa"/>
+                <outlet property="forwardButton" destination="aNS-Oc-uDD" id="vVr-tV-3ah"/>
+                <outlet property="progressView" destination="TjD-eK-CuX" id="UhQ-FL-Xyo"/>
+                <outlet property="toolbar" destination="QSh-gD-lM7" id="A23-E4-xdw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webkitView" destination="ezN-VW-RR4" id="dpg-zC-7Bp"/>
             </connections>
@@ -20,23 +25,75 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezN-VW-RR4">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <wkWebViewConfiguration key="configuration">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="TjD-eK-CuX">
+                    <rect key="frame" x="0.0" y="44" width="414" height="2.5"/>
+                </progressView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSh-gD-lM7">
+                    <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="pMG-BO-eWI"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="DVi-lq-jtS"/>
+                        <barButtonItem tag="1" image="first_page" id="oho-UT-zNP">
+                            <connections>
+                                <action selector="didTapBarButton:" destination="-1" id="fFR-YH-y7H"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="QF3-Nm-A5h"/>
+                        <barButtonItem tag="2" image="keyboard_arrow_left" id="wRj-Gq-8Zx">
+                            <connections>
+                                <action selector="didTapBarButton:" destination="-1" id="Dk6-HX-c4c"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ExG-PD-A9M"/>
+                        <barButtonItem tag="3" image="keyboard_arrow_right" id="aNS-Oc-uDD">
+                            <connections>
+                                <action selector="didTapBarButton:" destination="-1" id="KCH-TJ-aa1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="V5Z-8S-fY5"/>
+                        <barButtonItem tag="4" image="refresh" id="AcH-NK-daI">
+                            <connections>
+                                <action selector="didTapBarButton:" destination="-1" id="Qty-DY-dU7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="yYX-U0-3Zy"/>
+                    </items>
+                    <color key="tintColor" name="141428"/>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ezN-VW-RR4" secondAttribute="bottom" id="30M-7I-lhL"/>
+                <constraint firstItem="QSh-gD-lM7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="27d-ww-tJS"/>
                 <constraint firstItem="ezN-VW-RR4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="4Pw-Su-Ucs"/>
                 <constraint firstItem="ezN-VW-RR4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7TO-59-zjo"/>
+                <constraint firstItem="TjD-eK-CuX" firstAttribute="leading" secondItem="ezN-VW-RR4" secondAttribute="leading" id="C0J-pd-UeI"/>
+                <constraint firstItem="TjD-eK-CuX" firstAttribute="trailing" secondItem="ezN-VW-RR4" secondAttribute="trailing" id="WO6-YU-SEK"/>
+                <constraint firstItem="TjD-eK-CuX" firstAttribute="top" secondItem="ezN-VW-RR4" secondAttribute="top" id="Zgd-ql-hoK"/>
+                <constraint firstItem="QSh-gD-lM7" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="hqe-1y-DKf"/>
+                <constraint firstItem="QSh-gD-lM7" firstAttribute="top" secondItem="ezN-VW-RR4" secondAttribute="bottom" id="miR-kg-aRx"/>
+                <constraint firstItem="QSh-gD-lM7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sWE-eh-rvW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ezN-VW-RR4" secondAttribute="trailing" id="u9f-Gi-XW5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
     </objects>
+    <resources>
+        <image name="first_page" width="18" height="18"/>
+        <image name="keyboard_arrow_left" width="18" height="18"/>
+        <image name="keyboard_arrow_right" width="18" height="18"/>
+        <image name="refresh" width="18" height="18"/>
+        <namedColor name="141428">
+            <color red="0.078000001609325409" green="0.078000001609325409" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
 </document>

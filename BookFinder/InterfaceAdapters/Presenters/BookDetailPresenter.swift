@@ -11,7 +11,11 @@ import Foundation
 //MARK: - BookDetailView
 
 protocol BookDetailViewControllable: class {
-    func showBookDetail(_ url: URL?)
+    func loadWebPage(_ url: URL)
+    func goBackToPrevWebPage()
+    func goForwardToNextWebPage()
+    func reloadWebPage()
+    func exit()
 }
 
 //MARK: - BookDetailPresenter
@@ -30,7 +34,23 @@ extension BookDetailPresenter {
 
 extension BookDetailPresenter: BookDetailOutputBoundary {
     
-    func showBookDetail(_ url: URL?) {
-        view.showBookDetail(url)
+    func goToWebPage(_ url: URL) {
+        view.loadWebPage(url)
+    }
+    
+    func goBackToPrevWebPage() {
+        view.goBackToPrevWebPage()
+    }
+    
+    func goForwardToNextWebPage() {
+        view.goForwardToNextWebPage()
+    }
+    
+    func reloadWebPage() {
+        view.reloadWebPage()
+    }
+    
+    func exit() {
+        view.exit()
     }
 }
