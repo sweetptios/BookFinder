@@ -32,19 +32,24 @@ protocol BookIndexOutputBoundary: class {
 }
 
 class BookIndexInteractor {
-    
-    private let resultCountMaxLimit: Int = 40
-    private let defaultKeyword: String = "힐링"
+
     private var outputBoundary: BookIndexOutputBoundary?
     private var repository: IBookSummaryRepository
     private var state: State
     
+    private let resultCountMaxLimit: Int = 40
+    private var columnCount = 1
+    var maxResultCount: Int { (resultCountMaxLimit / columnCount) * columnCount }
+    
     fileprivate struct State {
+
+        static let defaultKeyword: String = "힐링"
+        
         var page: Int
         var keyword: String
         var products: [Book]
         var totalCount: Int
-        
+
         init() {
             page = 0
             keyword = ""
@@ -63,9 +68,8 @@ class BookIndexInteractor {
 extension BookIndexInteractor: BookIndexInputBoundary {
       
     func viewIsReady(columnCount: Int) {
-        let maxResultCount = (resultCountMaxLimit / columnCount) * columnCount
-        repository.setMaxResultCount(maxResultCount)
-        state.keyword = defaultKeyword
+        self.columnCount = columnCount
+        state.keyword = State.defaultKeyword
         outputBoundary?.showSearchKeyword(state.keyword)
         fetchFirstBooks()
     }
@@ -97,7 +101,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
     private func fetchFirstBooks() {
         let newPage = 1
         outputBoundary?.showLoadingIndicator()
-        repository.fetchBooks(page: newPage, keyword: state.keyword) {[weak self] (result) in
+        repository.fetchBooks(page: newPage, keyword: state.keyword, maxResultCount: maxResultCount) {[weak self] (result) in
             guard let self = self else { return }
             switch(result) {
             case let .success(data):
@@ -118,7 +122,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
     }
     
     private func loadBooksMore() {
-        repository.fetchBooks(page: state.page + 1, keyword: state.keyword){[weak self](result) in
+        repository.fetchBooks(page: state.page + 1, keyword: state.keyword, maxResultCount: maxResultCount){[weak self](result) in
             guard let self = self else { return }
             switch(result) {
             case let .success(data):

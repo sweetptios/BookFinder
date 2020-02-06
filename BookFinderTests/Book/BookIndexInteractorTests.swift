@@ -26,6 +26,7 @@ class BookIndexInteractorTests: XCTestCase {
     
     func test_첫페이지책목록을요청했을때_성공하면_책목록을보여준다() {
         // [given]
+        Stubber.register(outputBoundaryMock.showSearchKeyword) { _ in }
         Stubber.register(outputBoundaryMock.showLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showBooks) { _ in }
         Stubber.register(outputBoundaryMock.scrollToTop) { _ in }
@@ -37,6 +38,7 @@ class BookIndexInteractorTests: XCTestCase {
         let dummyColumnCount = 1
         interactor.viewIsReady(columnCount: dummyColumnCount)
         // [then]
+       expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.scrollToTop).count).to(equal(1))
@@ -87,7 +89,7 @@ class BookIndexInteractorTests: XCTestCase {
         expect(f[safe: 0]?.arguments.1).to(equal(testList[testIndex].detailInfo))
     }
 
-    func test_다음페이지책목록을요청했을때_성공하면_기존목록에추가하여보여준다() {
+    func test_더보기를요청했을때_성공하면_기존목록에추가하여보여준다() {
         // [given]
         Stubber.register(outputBoundaryMock.deactivateRetryOnSeeingMore) { _ in }
         Stubber.register(outputBoundaryMock.showBooks) { _ in }
@@ -111,7 +113,7 @@ class BookIndexInteractorTests: XCTestCase {
         expect(products[safe: 1]?.id).to(equal(testObj2.id))
     }
     
-    func test_다음페이지책목록을요청했을때_실패하면_재시도가능하게만든다() {
+    func test_더보기를요청했을때_실패하면_재시도가능하게만든다() {
         // [given]
         Stubber.register(outputBoundaryMock.deactivateRetryOnSeeingMore) { _ in }
         Stubber.register(outputBoundaryMock.activateRetryOnSeeingMore) { _ in }
@@ -123,6 +125,7 @@ class BookIndexInteractorTests: XCTestCase {
         expect(Stubber.executions(self.outputBoundaryMock.activateRetryOnSeeingMore).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.alertErrorMessage).count).to(equal(1))
     }
+    
 
     func test_더보기재시도가선택됐을때_다음페이지책목록을요청한다() {
         // [given]

@@ -47,8 +47,9 @@ class BookSummaryRepositoryTests: XCTestCase {
         // [when]
         let dummyPage = 0
         let dummyKeyword = ""
+        let dummyMaxResultCount = 0
         let ex = XCTestExpectation(description: "test")
-        repository.fetchBooks(page: dummyPage, keyword: dummyKeyword) { (result) in
+        repository.fetchBooks(page: dummyPage, keyword: dummyKeyword, maxResultCount: dummyMaxResultCount) { (result) in
             // [then]
             switch(result) {
             case let .success(data):
@@ -75,8 +76,9 @@ class BookSummaryRepositoryTests: XCTestCase {
         let keyword = "test"
         // [when]
         let dummyPage = 0
+        let dummyMaxResultCount = 0
         let ex = XCTestExpectation(description: "in closure")
-        repository.fetchBooks(page: dummyPage, keyword: keyword) { (result) in
+        repository.fetchBooks(page: dummyPage, keyword: keyword, maxResultCount: dummyMaxResultCount) { (result) in
             // [then]
             switch(result) {
             case .success:
@@ -95,8 +97,9 @@ class BookSummaryRepositoryTests: XCTestCase {
         // [when]
         let dummyPage = 0
         let dummyKeyword = ""
+        let dummyMaxResultCount = 0
         let ex = XCTestExpectation(description: "test")
-        repository.fetchBooks(page: dummyPage, keyword: dummyKeyword) { (result) in
+        repository.fetchBooks(page: dummyPage, keyword: dummyKeyword, maxResultCount: dummyMaxResultCount) { (result) in
             // [then]
             switch(result) {
             case .success:

@@ -12,19 +12,13 @@ class BookSummaryRepository: IBookSummaryRepository {
         
     private let networking: INetworkingService
     private let apiKey: String = "AIzaSyCdyRfz2EwdpHesMXGGxgsaT37G-NsOy_4"
-    private var maxResultCount: Int = 0
 
     required init(networking: INetworkingService) {
         self.networking = networking
     }
     
-    func setMaxResultCount(_ count: Int) {
-        maxResultCount = count
-    }
-    
-    func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
-
-        let params = makeParams(page: page, keyword: keyword)
+    func fetchBooks(page: Int, keyword: String, maxResultCount:Int, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
+        let params = makeParams(page, keyword, maxResultCount)
         networking.request(.books, parameters: params)?
             .response{(result :Result<BookIndexAPIModel, ServerAPIResponseError>) in
                 DispatchQueue.main.async {
@@ -42,7 +36,7 @@ class BookSummaryRepository: IBookSummaryRepository {
         }
     }
 
-    private func makeParams(page: Int, keyword: String) -> [String: Any] {
+    private func makeParams(_ page: Int, _ keyword: String, _ maxResultCount:Int) -> [String: Any] {
         
         var params = [String: Any]()
         params["startIndex"] = (page - 1) * maxResultCount

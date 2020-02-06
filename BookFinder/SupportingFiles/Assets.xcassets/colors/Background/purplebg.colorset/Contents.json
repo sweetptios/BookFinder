@@ -28,7 +28,7 @@
         }
       ],
       "color" : {
-        "platform" : "osx",
+        "platform" : "ios",
         "reference" : "systemIndigoColor"
       }
     }

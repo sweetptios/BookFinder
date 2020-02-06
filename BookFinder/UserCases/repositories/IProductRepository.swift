@@ -36,6 +36,5 @@ struct RepositoryError: Error {
 
 protocol IBookSummaryRepository {
     
-    func setMaxResultCount(_ count: Int)
-    func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book],totalCount: Int),RepositoryError>) -> Void)?)
+    func fetchBooks(page: Int, keyword: String, maxResultCount: Int, completion: ((Result<(books: [Book],totalCount: Int),RepositoryError>) -> Void)?)
 }
