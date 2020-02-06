@@ -30,8 +30,8 @@ final class BookIndexInteractorMock: BookIndexInputBoundary {
         Stubber.invoke(didSelectBook, args: index)
     }
     
-    func viewIsReady() {
-        Stubber.invoke(viewIsReady, args: ())
+    func viewIsReady(columnCount: Int) {
+        Stubber.invoke(viewIsReady, args: columnCount)
     }
     
     func didSelectKeywordSearch(_ keyword: String) {
@@ -147,6 +147,10 @@ final class BookIndexViewMock: BookIndexViewControllable {
 }
 
 final class BookSummaryRepositoryMock: IBookSummaryRepository {
+    
+    func setMaxResultCount(_ count: Int) {
+        Stubber.invoke(setMaxResultCount, args: count)
+    }
     
     func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         Stubber.invoke(fetchBooks, args: escaping(page, keyword, completion))

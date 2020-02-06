@@ -9,15 +9,17 @@
 import Foundation
 
 class BookSummaryRepository: IBookSummaryRepository {
-    
+        
     private let networking: INetworkingService
-    #warning("TODO - 의존성 주입? - 화면 구성에 따라 달라질 수 있어야 한다. ")
-    private let maxResultCount: Int = 39
     private let apiKey: String = "AIzaSyCdyRfz2EwdpHesMXGGxgsaT37G-NsOy_4"
-    private let totalResultCount: Int = 0
+    private var maxResultCount: Int = 0
 
     required init(networking: INetworkingService) {
         self.networking = networking
+    }
+    
+    func setMaxResultCount(_ count: Int) {
+        maxResultCount = count
     }
     
     func fetchBooks(page: Int, keyword: String, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {

@@ -37,14 +37,14 @@ class BookIndexViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        inputBoundary.viewIsReady()
+        inputBoundary.viewIsReady(columnCount: BookIndexLayout.columnCount)
     }
 }
 
 //MARK: - setup views
 
 struct BookIndexLayout {
-    private static let columnCount = 3
+    fileprivate static let columnCount = 3
     fileprivate static let sectionEdgeInset =  UIEdgeInsets(top: 24, left: 12, bottom: 0, right: 12)
     fileprivate static let minimumLineSpacing: CGFloat = 24
     fileprivate static let minimumInteritemSpacing: CGFloat = 24

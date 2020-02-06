@@ -10,7 +10,7 @@ import Foundation
 
 protocol BookIndexInputBoundary: class {
     init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository)
-    func viewIsReady()
+    func viewIsReady(columnCount: Int)
     func didSelectSeeingMore()
     func didRetryOnSeeingMore()
     func didSelectBook(index: Int)
@@ -33,6 +33,8 @@ protocol BookIndexOutputBoundary: class {
 
 class BookIndexInteractor {
     
+    private let resultCountMaxLimit: Int = 40
+    private let defaultKeyword: String = "힐링"
     private var outputBoundary: BookIndexOutputBoundary?
     private var repository: IBookSummaryRepository
     private var state: State
@@ -60,8 +62,10 @@ class BookIndexInteractor {
 
 extension BookIndexInteractor: BookIndexInputBoundary {
       
-    func viewIsReady() {
-        state.keyword = "힐링"
+    func viewIsReady(columnCount: Int) {
+        let maxResultCount = (resultCountMaxLimit / columnCount) * columnCount
+        repository.setMaxResultCount(maxResultCount)
+        state.keyword = defaultKeyword
         outputBoundary?.showSearchKeyword(state.keyword)
         fetchFirstBooks()
     }
@@ -79,6 +83,15 @@ extension BookIndexInteractor: BookIndexInputBoundary {
     func didRetryOnSeeingMore() {
         outputBoundary?.deactivateRetryOnSeeingMore()
         loadBooksMore()
+    }
+    
+    func didSelectKeywordSearch(_ keyword: String) {
+        state.keyword = keyword
+        fetchFirstBooks()
+    }
+    
+    func didEndEditingSearchKeyword() {
+        outputBoundary?.showSearchKeyword(state.keyword)
     }
     
     private func fetchFirstBooks() {
@@ -119,15 +132,6 @@ extension BookIndexInteractor: BookIndexInputBoundary {
                 self.outputBoundary?.alertErrorMessage(error.localizedDescription)
             }
         }
-    }
-    
-    func didSelectKeywordSearch(_ keyword: String) {
-        state.keyword = keyword
-        fetchFirstBooks()
-    }
-    
-    func didEndEditingSearchKeyword() {
-        outputBoundary?.showSearchKeyword(state.keyword)
     }
 }
 

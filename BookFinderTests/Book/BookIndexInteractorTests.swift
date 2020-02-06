@@ -34,7 +34,8 @@ class BookIndexInteractorTests: XCTestCase {
         repositoryStub.setTestData(([],0))
         repositoryStub.setSuccess(true)
         // [when]
-        interactor.viewIsReady()
+        let dummyColumnCount = 1
+        interactor.viewIsReady(columnCount: dummyColumnCount)
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.showLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
@@ -54,7 +55,8 @@ class BookIndexInteractorTests: XCTestCase {
         repositoryStub.setSuccess(false)
         let totalCount = 0
         // [when]
-        interactor.viewIsReady()
+        let dummyColumnCount = 1
+        interactor.viewIsReady(columnCount: dummyColumnCount)
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(2))
@@ -75,7 +77,8 @@ class BookIndexInteractorTests: XCTestCase {
         let testIndex = testList.count - 1
         repositoryStub.setSuccess(true)
         repositoryStub.setTestData(testResult)
-        interactor.viewIsReady()
+        let dummyColumnCount = 1
+        interactor.viewIsReady(columnCount: dummyColumnCount)
         // [when]
         interactor.didSelectBook(index: testIndex)
         // [then]
@@ -92,7 +95,8 @@ class BookIndexInteractorTests: XCTestCase {
         let testResult1 = ([testObj1], 10)
         repositoryStub.setSuccess(true)
         repositoryStub.setTestData(testResult1)
-        interactor.viewIsReady()
+        let dummyColumnCount = 1
+        interactor.viewIsReady(columnCount: dummyColumnCount)
         let testObj2 = Book(id: "b", thumbnailImage: URL(string: "https://test2.com"))
         let testResult2 = ([testObj2], 10)
         repositoryStub.setSuccess(true)
