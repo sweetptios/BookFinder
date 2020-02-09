@@ -55,6 +55,7 @@ class BookIndexInteractorTests: XCTestCase {
         Stubber.register(outputBoundaryMock.hideLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showTotalCount) { _ in }
         repositoryStub.setSuccess(false)
+        let errorMessage = repositoryStub.testErrorMessage
         let totalCount = 0
         // [when]
         let dummyColumnCount = 1
@@ -65,7 +66,7 @@ class BookIndexInteractorTests: XCTestCase {
         expect(Stubber.executions(self.outputBoundaryMock.hideLoadingIndicator).count).to(equal(1))
         
         let f1 = Stubber.executions(self.outputBoundaryMock.alertErrorMessage)
-        expect(f1[safe: 0]?.arguments).to(equal(repositoryStub.testErrorMessage))
+        expect(f1[safe: 0]?.arguments).to(equal(errorMessage))
         expect(Stubber.executions(self.outputBoundaryMock.hideLoadingIndicator).count).to(equal(1))
         let f2 = Stubber.executions(self.outputBoundaryMock.showTotalCount)
         expect(f2[safe: 0]?.arguments).to(equal(totalCount))
