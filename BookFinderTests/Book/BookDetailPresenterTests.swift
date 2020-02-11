@@ -26,7 +26,7 @@ class BookDetailPresenterTests: XCTestCase {
 
     func test_원하는페이지로이동할수있다() {
         // [given]
-        Stubber.register(viewMock.loadWebPage) { _ in }
+        registerMethodsInMock()
         let url = URL(string: "https://test.com")
         // [when]
         presenter.goToWebPage(url!)
@@ -38,7 +38,7 @@ class BookDetailPresenterTests: XCTestCase {
     
     func test_이전페이지를보여준다() {
         // [given]
-        Stubber.register(viewMock.goBackToPrevWebPage) { _ in }
+        registerMethodsInMock()
         // [when]
         presenter.goBackToPrevWebPage()
         // [then]
@@ -47,7 +47,7 @@ class BookDetailPresenterTests: XCTestCase {
     
     func test_다음페이지를보여준다() {
         // [given]
-        Stubber.register(viewMock.goForwardToNextWebPage) { _ in }
+        registerMethodsInMock()
         // [when]
         presenter.goForwardToNextWebPage()
         // [then]
@@ -56,7 +56,7 @@ class BookDetailPresenterTests: XCTestCase {
     
     func test_현재페이지를리로드해준다() {
         // [given]
-        Stubber.register(viewMock.reloadWebPage) { _ in }
+        registerMethodsInMock()
         // [when]
         presenter.reloadWebPage()
         // [then]
@@ -65,10 +65,19 @@ class BookDetailPresenterTests: XCTestCase {
     
     func test_이전화면으로돌아갈수있다() {
         // [given]
-        Stubber.register(viewMock.exit) { _ in }
+        registerMethodsInMock()
         // [when]
         presenter.exit()
         // [then]
         expect(Stubber.executions(self.viewMock.exit).count).to(equal(1))
+    }
+    
+    private func registerMethodsInMock() {
+        Stubber.register(viewMock.loadWebPage) { _ in }
+        Stubber.register(viewMock.goBackToPrevWebPage) { _ in }
+        Stubber.register(viewMock.goForwardToNextWebPage) { _ in }
+        Stubber.register(viewMock.reloadWebPage) { _ in }
+        Stubber.register(viewMock.viewInSafari) { _ in }
+        Stubber.register(viewMock.exit) { _ in }
     }
 }

@@ -31,6 +31,14 @@ class BookDetailOutputBoundaryMock: BookDetailOutputBoundary {
     func exit() {
         Stubber.invoke(exit, args: ())
     }
+    
+    func viewInSafari(_ url: URL) {
+        Stubber.invoke(viewInSafari, args: url)
+    }
+    
+    func showShareActivity(with url: URL) {
+        Stubber.invoke(showShareActivity, args: url)
+    }
 }
 
 class BookDetailViewMock: BookDetailViewControllable {
@@ -53,5 +61,13 @@ class BookDetailViewMock: BookDetailViewControllable {
     
     func exit() {
         Stubber.invoke(exit, args: ())
+    }
+    
+    func viewInSafari(_ url: URL) {
+        Stubber.invoke(viewInSafari, args: url)
+    }
+    
+    func showShareActivity(with url: URL) {
+        Stubber.invoke(showShareActivity, args: url)
     }
 }

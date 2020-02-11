@@ -15,6 +15,7 @@ protocol BookDetailViewControllable: class {
     func goBackToPrevWebPage()
     func goForwardToNextWebPage()
     func reloadWebPage()
+    func showShareActivity(with url: URL)
     func exit()
 }
 
@@ -48,6 +49,10 @@ extension BookDetailPresenter: BookDetailOutputBoundary {
     
     func reloadWebPage() {
         view.reloadWebPage()
+    }
+    
+    func showShareActivity(with url: URL) {
+        view.showShareActivity(with: url)
     }
     
     func exit() {
