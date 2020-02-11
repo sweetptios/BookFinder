@@ -32,7 +32,7 @@ class BookDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputBoundary.viewDidLoad()
+        inputBoundary.viewIsReady()
         setupViews()
         addObservers()
     }
@@ -46,7 +46,9 @@ class BookDetailViewController: UIViewController {
         case 3:
             inputBoundary.didSelectForward()
         case 4:
-            inputBoundary.didSelectReload()
+            inputBoundary.didSelectShare()
+        case 5:
+            inputBoundary.didSelectSafari()
         default:
             print(#function)
         }
@@ -55,6 +57,11 @@ class BookDetailViewController: UIViewController {
     @objc
     func didTapCloseButton(_ sender: Any) {
         inputBoundary.didSelectClose()
+    }
+    
+    @objc
+    func didTapReloadButton(_ sender: Any) {
+        inputBoundary.didSelectReload()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,6 +109,10 @@ extension BookDetailViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didTapCloseButton(_:)))
             navigationItem.leftBarButtonItem?.tintColor = AppColor.darkNavy
         }
+        if let image = UIImage(named: "refresh") {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didTapReloadButton(_:)))
+            navigationItem.rightBarButtonItem?.tintColor = AppColor.darkNavy
+        }
     }
     
     private func setupProgressView() {
@@ -130,6 +141,15 @@ extension BookDetailViewController: BookDetailViewControllable {
     
     func reloadWebPage() {
         webkitView?.reload()
+    }
+    
+    func showShareActivity(with url: URL) {
+        let text = url.absoluteString
+        let textToShare = [ text ]
+        // 액티비티 뷰 컨트롤러 셋업
+        let activityVC = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        // 현재 뷰에서 present
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     func exit() {
@@ -230,6 +250,12 @@ extension BookDetailViewController: WKUIDelegate {
 
 extension BookDetailViewController: WKNavigationDelegate {
 
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let url = webView.url {
+            inputBoundary.webpageWasChanged(url)
+        }
+    }
+    
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
     }

@@ -22,7 +22,7 @@ extension AppDependency {
         var rootViewController: BookIndexViewController!
         rootViewController = BookIndexViewController(inputBoundary: interactor, csg: BookIndexCSG(), productDetailVCFactory: {
             let presenter = BookDetailPresenter()
-            let interactor = BookDetailInteractor(outputBoundary: presenter, itemId: $0, detailInfoUrl: $1)
+            let interactor = BookDetailInteractor(outputBoundary: presenter, itemId: $0, detailInfoUrl: $1, otherAppService: OtherAppService())
             let viewController = BookDetailViewController(inputBoundary: interactor)
             presenter.setView(viewController)
             let navigationController = UINavigationController(rootViewController: viewController)
