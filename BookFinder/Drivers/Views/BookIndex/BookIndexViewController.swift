@@ -44,19 +44,25 @@ class BookIndexViewController: UIViewController {
 //MARK: - setup views
 
 struct BookIndexLayout {
+    //MARK: - about collection view
     fileprivate static let columnCount = 3
     fileprivate static let sectionEdgeInset =  UIEdgeInsets(top: 24, left: 12, bottom: 0, right: 12)
     fileprivate static let minimumLineSpacing: CGFloat = 24
     fileprivate static let minimumInteritemSpacing: CGFloat = 24
-    fileprivate static let footerHeight: CGFloat = 34*2 + 20
     fileprivate static let headerHeight: CGFloat = 50
-    fileprivate static var horizontalMargin: CGFloat { sectionEdgeInset.left + sectionEdgeInset.right + minimumInteritemSpacing*(CGFloat(max(0, columnCount-1))) }
-    fileprivate static var itemSize: CGSize { CGSize(width: Self.thumbnailSize.width, height: Self.thumbnailSize.height + textAreaHeight ) }
-    static var thumbnailSize: CGSize {
-        let width = floor((UIScreen.main.bounds.width - horizontalMargin) / CGFloat(columnCount))
+    fileprivate static let footerHeight: CGFloat = 34*2 + 20
+    //MARK: - about cell
+    private static var itemHorizontalMargin: CGFloat {
+        sectionEdgeInset.left + sectionEdgeInset.right + minimumInteritemSpacing*(CGFloat(max(0, columnCount-1)))
+    }
+    static var itemThumbnailSize: CGSize {
+        let width = floor((UIScreen.main.bounds.width - itemHorizontalMargin) / CGFloat(columnCount))
         return CGSize(width: width, height: width / 0.81)
     }
-    static var textAreaHeight: CGFloat { 91 }
+    fileprivate static var itemSize: CGSize {
+        let textAreaHeight: CGFloat = 91
+        return CGSize(width: Self.itemThumbnailSize.width, height: Self.itemThumbnailSize.height + textAreaHeight )
+    }
 }
 
 extension BookIndexViewController {

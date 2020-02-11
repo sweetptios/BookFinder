@@ -81,12 +81,12 @@ extension BookIndexInteractor: BookIndexInputBoundary {
     }
     
     func didSelectSeeingMore() {
-        loadBooksMore()
+        fetchBooksMore()
     }
     
     func didRetryOnSeeingMore() {
         outputBoundary?.deactivateRetryOnSeeingMore()
-        loadBooksMore()
+        fetchBooksMore()
     }
     
     func didSelectKeywordSearch(_ keyword: String) {
@@ -121,7 +121,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
         }
     }
     
-    private func loadBooksMore() {
+    private func fetchBooksMore() {
         repository.fetchBooks(page: state.page + 1, keyword: state.keyword, maxResultCount: maxResultCount){[weak self](result) in
             guard let self = self else { return }
             switch(result) {

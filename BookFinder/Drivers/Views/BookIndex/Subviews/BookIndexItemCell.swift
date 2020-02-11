@@ -40,7 +40,7 @@ class BookIndexItemCell: UICollectionViewCell, CollectionItemView {
 extension BookIndexItemCell {
     
     private func setupImageView() {
-        thumbnailImageWidthConstraint?.constant = BookIndexLayout.thumbnailSize.width
+        thumbnailImageWidthConstraint?.constant = BookIndexLayout.itemThumbnailSize.width
         thumbnailImageView?.contentMode = .scaleAspectFill
         thumbnailImageView?.layer.cornerRadius = 1
         thumbnailImageView?.layer.masksToBounds = true
