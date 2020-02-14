@@ -62,12 +62,12 @@ extension CollectionSectionGroup {
      * @details usage -
      *  let indexPath = IndexPath(item:0, section:2) xxCollectionGroup[indexPath]
      */
-    subscript(_ indexPath: IndexPath) -> CollectionItemViewModel? {
+    subscript(_ indexPath: IndexPath) -> CollectionItemViewData? {
         get { self[indexPath.section, indexPath.row] }
         set { self[indexPath.section, indexPath.row] = newValue }
     }
 
-    subscript(section: T, itemIndex: Int) -> CollectionItemViewModel? {
+    subscript(section: T, itemIndex: Int) -> CollectionItemViewData? {
         get { self[section.index, itemIndex] }
         set { self[section.index, itemIndex] = newValue }
     }
@@ -75,7 +75,7 @@ extension CollectionSectionGroup {
     /**
      * @details usage -  xxCollectionGroup[0,0]
      */
-    subscript(sectionIndex: Int, itemIndex: Int) -> CollectionItemViewModel? {
+    subscript(sectionIndex: Int, itemIndex: Int) -> CollectionItemViewData? {
         get { self[item: sectionIndex, itemIndex]?.itemViewModel }
         set {
             let theItem = self[item: sectionIndex, itemIndex]
@@ -113,11 +113,11 @@ extension CollectionSection {
 //MARK: - Item
 
 final class CollectionItem {
-    private(set) var itemViewModel: CollectionItemViewModel?
+    private(set) var itemViewModel: CollectionItemViewData?
     private(set) var itemViewType: NSObject.Type
     private(set) var reusableIdentifier: String
 
-    init(itemViewData: CollectionItemViewModel? = nil, itemViewType: NSObject.Type, reusableIdentifier: String? = nil) {
+    init(itemViewData: CollectionItemViewData? = nil, itemViewType: NSObject.Type, reusableIdentifier: String? = nil) {
         self.itemViewModel = itemViewData
         self.itemViewType = itemViewType
         self.reusableIdentifier = reusableIdentifier ?? itemViewType.className
@@ -125,7 +125,7 @@ final class CollectionItem {
 }
 extension CollectionItem {
     var hasData: Bool { itemViewModel != nil }
-    func setItemViewModel(_ data: CollectionItemViewModel?) {
+    func setItemViewModel(_ data: CollectionItemViewData?) {
         itemViewModel = data
     }
 }
@@ -133,16 +133,16 @@ extension CollectionItem {
 //MARK: - Item View
 
 protocol CollectionItemView {
-    func configure(_ data: CollectionItemViewModel)
+    func configure(_ data: CollectionItemViewData)
 }
 
 //MARK: - Model for View
 
-protocol CollectionItemViewModel {}
+protocol CollectionItemViewData {}
 
 /**
  * @brief 공간만 차지하는 빈뷰일 경우 사용
  */
-struct CollectionItemEmptyViewModel: CollectionItemViewModel {}
+struct CollectionItemEmptyViewData: CollectionItemViewData {}
 
 

@@ -90,8 +90,8 @@ class CollectionSectionGroupTests: XCTestCase {
         let sectionIndex = 0
         let itemCount = collectionSectionGroup.itemCount(at: sectionIndex)
         // [when]
-        let itemA = CollectionItem(itemViewData: CollectionItemEmptyViewModel(), itemViewType: UICollectionViewCell.self, reusableIdentifier: UICollectionViewCell.className)
-        let itemB = CollectionItem(itemViewData: CollectionItemEmptyViewModel(), itemViewType: UICollectionViewCell.self, reusableIdentifier: UICollectionViewCell.className)
+        let itemA = CollectionItem(itemViewData: CollectionItemEmptyViewData(), itemViewType: UICollectionViewCell.self, reusableIdentifier: UICollectionViewCell.className)
+        let itemB = CollectionItem(itemViewData: CollectionItemEmptyViewData(), itemViewType: UICollectionViewCell.self, reusableIdentifier: UICollectionViewCell.className)
         collectionSectionGroup.addItems([itemA, itemB], at: sectionIndex)
         // [then]
         expect(self.collectionSectionGroup.itemCount(at: sectionIndex)).to(equal(itemCount+2))
@@ -101,7 +101,7 @@ class CollectionSectionGroupTests: XCTestCase {
         // [given]
         let indexPath = IndexPath(item: collectionSectionGroup.itemCount(at: 0), section: 0)
         // [when]
-        let itemA = CollectionItem(itemViewData: CollectionItemEmptyViewModel(), itemViewType: AItemView.self)
+        let itemA = CollectionItem(itemViewData: CollectionItemEmptyViewData(), itemViewType: AItemView.self)
         collectionSectionGroup.addItems([itemA], at: indexPath.section)
         // [then]
         expect(self.collectionSectionGroup.reusableIdentifier(at:indexPath)).to(equal(AItemView.className))
@@ -115,7 +115,7 @@ class CollectionSectionGroupTests: XCTestCase {
         collectionSectionGroup[sectionIndex,0] = viewModel
         // [when]
         let testViewModel = collectionSectionGroup[sectionType, 0] as! ACollectionItemViewData
-        collectionSectionGroup.addItems([CollectionItem( itemViewData:CollectionItemEmptyViewModel(), itemViewType: UITableViewCell.self)], at: sectionType)
+        collectionSectionGroup.addItems([CollectionItem( itemViewData:CollectionItemEmptyViewData(), itemViewType: UITableViewCell.self)], at: sectionType)
         let testCount = collectionSectionGroup.itemCount(at: sectionType)
         // [then]
         expect(viewModel.a).to(equal(testViewModel.a))

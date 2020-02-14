@@ -27,4 +27,4 @@ final class BookIndexCSG: CollectionSectionGroup {
 
 //MARK: - CollectionItemViewModel
 
-extension BookIndexItemViewData: CollectionItemViewModel {}
+extension BookIndexItemViewData: CollectionItemViewData {}
