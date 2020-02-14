@@ -45,25 +45,25 @@ final class FakeCSG: CollectionSectionGroup {
 }
 
 class AItemView: UICollectionViewCell, CollectionItemView {
-    func configure(_ data: CollectionItemViewModel) {}
+    func configure(_ data: CollectionItemViewData) {}
 }
 
 class BItemView: UICollectionViewCell, CollectionItemView {
-    func configure(_ data: CollectionItemViewModel) {}
+    func configure(_ data: CollectionItemViewData) {}
 }
 
 class CItemView: UICollectionViewCell, CollectionItemView {
-    func configure(_ data: CollectionItemViewModel) {}
+    func configure(_ data: CollectionItemViewData) {}
 }
   
-struct ACollectionItemViewData: CollectionItemViewModel {
+struct ACollectionItemViewData: CollectionItemViewData {
     private(set) var a: Int
 }
 
-struct BCollectionItemViewData: CollectionItemViewModel {
+struct BCollectionItemViewData: CollectionItemViewData {
     private(set) var b: String
 }
 
-struct CCollectionItemViewData: CollectionItemViewModel {
+struct CCollectionItemViewData: CollectionItemViewData {
     private(set) var c: [Int]
 }

@@ -20,8 +20,8 @@ class BookIndexItemCell: UICollectionViewCell, CollectionItemView {
         setupViews()
     }
 
-    func configure(_ data: CollectionItemViewModel) {
-        if let data = data as? BookIndexCollectionItemViewData {
+    func configure(_ data: CollectionItemViewData) {
+        if let data = data as? BookIndexItemViewData {
             thumbnailImageView?.loadingImage(with: data.thumbnailUrl, placeholder: UIImage(named: "no_cover_thumb"))
             titleLabel?.text = data.title
             authorsLabel?.text = data.author

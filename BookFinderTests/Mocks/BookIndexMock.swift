@@ -97,7 +97,7 @@ final class BookIndexOutputBoundaryMock: BookIndexOutputBoundary {
 
 final class BookIndexViewMock: BookIndexViewControllable {
     
-    func showBooks(_ products: [BookIndexCollectionItemViewData]) {
+    func showBooks(_ products: [BookIndexItemViewData]) {
         Stubber.invoke(showBooks, args: products)
     }
     
