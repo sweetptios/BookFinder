@@ -144,17 +144,13 @@ extension BookDetailViewController: BookDetailViewControllable {
     }
     
     func showShareActivity(with url: URL) {
-        let text = url.absoluteString
-        let textToShare = [ text ]
-        // 액티비티 뷰 컨트롤러 셋업
-        let activityVC = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        // 현재 뷰에서 present
-        self.present(activityVC, animated: true, completion: nil)
+        let activityVC = UIActivityViewController(activityItems: [ url.absoluteString ], applicationActivities: nil)
+        self.present(activityVC, animated: true)
     }
     
     func exit() {
         webkitView?.stopLoading()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 

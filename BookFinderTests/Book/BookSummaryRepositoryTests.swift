@@ -56,12 +56,12 @@ class BookSummaryRepositoryTests: XCTestCase {
                 expect(data.books[0].title).to(equal(testBooks[0].title))
                 expect(data.books[1].title).to(equal(testBooks[1].title))
                 expect(data.totalCount).to(equal(testTotalCount))
-                XCTAssert(true)
             case .failure(let error):
-                XCTAssert(false, "test failed: error - \(error)")
+                XCTFail("test failed: error - \(error)")
             }
             ex.fulfill()
         }
+        #warning("TODO - 타이아웃 체크하기")
         _ = XCTWaiter.wait(for: [ex], timeout: 0.01)
     }
 
@@ -82,7 +82,7 @@ class BookSummaryRepositoryTests: XCTestCase {
             // [then]
             switch(result) {
             case .success:
-                XCTAssertTrue(false)
+                XCTFail()
             case let .failure(error):
                 expect(error.kind).to(equal(RepositoryError.ErrorKind.emptySearchResult(keyword: keyword)))
             }
@@ -103,7 +103,7 @@ class BookSummaryRepositoryTests: XCTestCase {
             // [then]
             switch(result) {
             case .success:
-                XCTAssertTrue(false)
+                XCTFail()
             case .failure:
                 XCTAssert(true)
             }

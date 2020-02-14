@@ -45,17 +45,10 @@ class BookIndexInteractor {
 
         static let defaultKeyword: String = "힐링"
         
-        var page: Int
-        var keyword: String
-        var products: [Book]
-        var totalCount: Int
-
-        init() {
-            page = 0
-            keyword = ""
-            products = []
-            totalCount = 0
-        }
+        var page: Int = 0
+        var keyword: String = ""
+        var products: [Book] = []
+        var totalCount: Int = 0
     }
     
     public required init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository) {
