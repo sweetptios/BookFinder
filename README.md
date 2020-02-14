@@ -22,6 +22,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
 
     **entity layer**의 도메인은 기업의 비지니스 룰을 담당하게 됩니다. 애플리케이션의 비지니스 룰을 구현해내는 기술과도 관련이 없습니다.  프론트엔드, 백엔드 등 상관없이 동일하게 적용될 수 있습니다.  마케터, 기획자, 디자이너 등등 다른 이해관계자도 동일하게 알고 있는 내용입니다.  
 
+    ```swift
         struct Book {
             private(set) var id: String
             private(set) var title: String
@@ -39,6 +40,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
                 self.detailInfo = detailInfo
              }
         }
+    ```
 
     > 좀 더 룰이 복잡해지면 내부 데이터를 사용하는 method가  추가될 것입니다.
 
@@ -48,6 +50,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
 
     예를 들어,  BookIndexInteractor는  이 레이어에서 정의한 BookIndexInputBoundary를  따름으로써 하위레이어가 전달하는 이벤트와 정보를 받게 됩니다. 
 
+    ```swift
         protocol BookIndexInputBoundary: class {
             init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository)
             func viewIsReady(columnCount: Int)
@@ -57,17 +60,21 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
             func didSelectKeywordSearch(_ keyword: String)
             func didEndEditingSearchKeyword()
         }
+    ```
 
     하위 레이어의  BookIndexViewController가  BookIndexInputBoundary 타입의 객체를 소유하고 있습니다. 
 
+    ```swift
         class BookIndexViewController: UIViewController {
         
             private var inputBoundary: BookIndexInputBoundary
         		...
         }
+     ```
 
     그리고, 유저 액션이 발생하면 적절한 메쏘드를 호출하여  interactor에게 알립니다.
 
+    ```swift
         func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
             if elementKind == UICollectionView.elementKindSectionFooter {
                 if moreRetryVisible == false {
@@ -75,9 +82,11 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
                  }
              }
         }
+    ```
 
     interactor는 이벤트의 처리 과정에서 다른 객체에게 협력을 요청합니다. 구현 세부사항은 하위의 interface adapter layer가 담당합니다. 그래서,  BookIndexOutputBoundary를 BookIndexPresenter가 구현하고, IBookSummaryRepository는 BookSummaryRepository 가 구현합니다.  
 
+    ```swift
         protocol BookIndexOutputBoundary: class {
             func showBooks(_ productList: [BookSummary])
             func showBookDetail(id: String, detailInfoUrl: URL?)
@@ -94,9 +103,11 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
         protocol IBookSummaryRepository {
             func fetchBooks(page: Int, keyword: String, maxResultCount: Int, completion: ((Result<(books: [Book],totalCount: Int),RepositoryError>) -> Void)?)
         }
+    ```
 
     아래와 같이 interactor는  didSelectSeeingMore() 가 호출됐을 때 repository에게 데이터를 요청한 후 결과에 따라 outputBoundary에게 필요한 정보를 제공하면서 행위를 위임합니다. 
 
+    ```swift
         func didSelectSeeingMore() {
                 loadBooksMore()
             }
@@ -119,13 +130,15 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
                 }
             }
         }
-
+    ```
+    
     **interface adapter layer**는 프레임워크와 내부 레이어를 분리시켜줍니다. 
 
     이 layer는 framework&driver layer의 driver에게 구현해야할 protocol을 제시합니다. 
 
     예를 들어,  BookIndexPresenter에서 사용하기 위해 BookIndexViewControllable를 정의하고 하위레이어가 구현하게 합니다. 
 
+    ```swift
         protocol BookIndexViewControllable: class {
             func showBooks(_ products: [BookIndexItemViewData])
             func showBookDetail(id: String, detailInfoUrl: URL?)
@@ -138,9 +151,11 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
             func hideLoadingIndicator()
             func scrollToTop()
         }
-
+    ```
+    
     BookIndexPresenter는 BookIndexViewControllable 타입의 객체를 참조하고 필요할 때 메쏘드를 호출합니다. 그리고,  데이터는 뷰에서 바로 표시할 수 있는 형태로 맵핑 후 전달합니다. 이제 뷰에 표시할 데이터의 형태를 바꾸기 위해서는 presenter를 수정하면 됩니다.  뷰의 레이아웃이나 속성이 변경이 된다면 뷰만 수정하면 됩니다.  
-
+    
+    ```swift
         class BookIndexPresenter {
             private weak var view: BookIndexViewControllable?
         }
@@ -168,12 +183,15 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
             private(set) var publishedDate: String
         }
 
+    ```
+    
     다른 예로, 네트워킹 서비스를 구현하기 위해서  NetworkingServiceAvailable을  정의하고 BookSummaryRepository에서 사용합니다. 
 
     NetworkingServiceAvailable은 framework & driver layer에서 NetworkingService 가 구현하고 있습니다. 
 
     use case layer의 IBookSummaryRepository에서는 repository가 구체적으로 어떤 기술을 쓰는지는 정의하지 않고 있습니다.  BookSummaryRepository만 네트워크 서비스를 사용하는 것을 알고 있습니다. 따라서, 데이터베이스 등 다른 서비스로 변경을 하는 경우 use case layer는 변경할 필요가 없습니다. 
 
+    ```swift
         protocol NetworkingServiceAvailable {
              func request(_ api: ServerAPI, parameters: [String: Any]?) -> IDataRequest?
         }
@@ -207,7 +225,8 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
         
             ...
         }
-
+    ```
+    
      **framework & driver layer**에는 UIKit, Alamofire 등의 라이브러리와 이러한 라이브러리를 사용하는 driver가 있습니다.
 
     > Clean Architecture에서,  아키텍처가 "시스템이 프레임워크 독립성을 가지게" 만들어야 한다고 말하고 있습니다. - 아키텍처는 ...라이브러리를 제공하는 소프트웨어, 즉, 프레임워크의 존재여부에 의존하지 않는다. ....프레임워크를 도구로 사용할 수 있으며, 프레임워크가 지닌 제약사항안으로 시스템을 욱여 넣도록 강제하지 않는다 (p214) -  그러나, 프레임워크가 애플리케이션의 흐름을 직접 제어할 수 있다고 보는 측면이 있기 때문에, 여기서 말하는 프레임워크를 일반적인 라이브러리라고 봤을때 헤깔리지 않았습니다.
@@ -268,6 +287,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
 
     위의 실행문에서`toBooks()` 가 BookIndexAPIModel을 Book 엔티티로 변환합니다. 
 
+    ```swift
         class BookSummaryRepository: IBookSummaryRepository {
                 
         		...
@@ -315,7 +335,8 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
                 }
             }
         }
-
+    ```
+    
     > 맵핑하는 로직이 여러 use case에서 중복될 수 있기 때문에 맵핑만을 담당하는 객체와 협력해야하는 시점이 올 것입니다.
 
           
