@@ -218,7 +218,7 @@ extension BookIndexViewController: UISearchBarDelegate {
 
 extension BookIndexViewController: BookIndexViewControllable {
     
-    func showBooks(_ products: [BookIndexCollectionItemViewData]) {
+    func showBooks(_ products: [BookIndexItemViewData]) {
         let items = products.map {
             CollectionItem(itemViewData: $0, itemViewType: BookIndexItemCell.self)
         }

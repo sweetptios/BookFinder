@@ -27,11 +27,4 @@ final class BookIndexCSG: CollectionSectionGroup {
 
 //MARK: - CollectionItemViewModel
 
-struct BookIndexCollectionItemViewData: CollectionItemViewModel {
-    private(set) var id: String
-    private(set) var thumbnailUrl: URL?
-    private(set) var title: String
-    private(set) var author: String
-    private(set) var publishedDate: String
-}
-
+extension BookIndexItemViewData: CollectionItemViewModel {}

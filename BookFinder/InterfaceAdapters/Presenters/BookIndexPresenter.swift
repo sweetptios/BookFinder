@@ -8,8 +8,9 @@
 
 import Foundation
 
+//MARK: - BookIndexViewControllable
 protocol BookIndexViewControllable: class {
-    func showBooks(_ products: [BookIndexCollectionItemViewData])
+    func showBooks(_ products: [BookIndexItemViewData])
     func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: String)
@@ -20,6 +21,8 @@ protocol BookIndexViewControllable: class {
     func hideLoadingIndicator()
     func scrollToTop()
 }
+
+//MARK: - BookIndexPresenter
 
 class BookIndexPresenter {
     private weak var view: BookIndexViewControllable?
@@ -42,7 +45,7 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
             if $0.authors.count >= 2 {
                 displayedAuthors += "외 \($0.authors.count)명"
             }
-            return BookIndexCollectionItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: displayedAuthors, publishedDate: displayedDate)
+            return BookIndexItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: displayedAuthors, publishedDate: displayedDate)
         })
     }
     
@@ -82,5 +85,15 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
         view?.scrollToTop()
     }
     
+}
+
+//MARK: - Data for View
+
+struct BookIndexItemViewData {
+    private(set) var id: String
+    private(set) var thumbnailUrl: URL?
+    private(set) var title: String
+    private(set) var author: String
+    private(set) var publishedDate: String
 }
 

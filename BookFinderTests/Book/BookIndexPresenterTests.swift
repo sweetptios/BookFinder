@@ -31,7 +31,7 @@ class BookIndexPresenterTests: XCTestCase {
         let displayedDate = date.string(format: "yyyy-MM-dd")
         let book1 = BookSummary(from: Book(id: "akjldf", title: "TDD 시작하기",authors: ["Hannah","Ashley"], publishedDate: date, thumbnailImage: URL(string: "http://picture.com/thumb/1")))
         let displayedAuthor = "\(book1.authors.first ?? "")외 \(book1.authors.count)명"
-        let viewData1 = BookIndexCollectionItemViewData(id: book1.id, thumbnailUrl: book1.thumbnailImage, title: book1.title, author: displayedAuthor, publishedDate: displayedDate)
+        let viewData1 = BookIndexItemViewData(id: book1.id, thumbnailUrl: book1.thumbnailImage, title: book1.title, author: displayedAuthor, publishedDate: displayedDate)
         // [when]
         presenter.showBooks([book1])
         // [then]
