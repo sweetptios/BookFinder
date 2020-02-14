@@ -11,7 +11,7 @@ import Stubber
 @testable import BookFinder
 
 
-struct NetworkingSeriveMock: INetworkingService {
+struct NetworkingSeriveMock: NetworkingServiceAvailable {
     func request(_ api: ServerAPI, parameters: [String : Any]?) -> IDataRequest? {
         Stubber.invoke(request, args: escaping(api, parameters))
     }

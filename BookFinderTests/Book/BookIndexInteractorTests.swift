@@ -38,7 +38,7 @@ class BookIndexInteractorTests: XCTestCase {
         let dummyColumnCount = 1
         interactor.viewIsReady(columnCount: dummyColumnCount)
         // [then]
-       expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(1))
+        expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.scrollToTop).count).to(equal(1))

@@ -40,7 +40,7 @@ struct MainDataRequest: IDataRequest {
     }
 }
 
-struct NetworkingService: INetworkingService {
+struct NetworkingService: NetworkingServiceAvailable {
     
     func request(_ api: ServerAPI, parameters: [String : Any]? = nil) -> IDataRequest? {
         
@@ -83,7 +83,7 @@ struct ErrorResponseAPIModel: IServerAPIModel {
 
 //MARK: - Alamofire
 
-extension TParameterEncoding {
+extension ParameterEncodingType {
     var encoding: ParameterEncoding {
         switch self {
         case .URLEncoding:

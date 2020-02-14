@@ -54,11 +54,11 @@ class MoreIndicatorView: UICollectionReusableView {
     private func setupRetry() {
         retryButton?.setTitle("재시도", for: .normal)
         retryButton?.setTitleColor(AppColor.gray, for: .normal)
-        retryButton?.addTarget(self, action: #selector(didTappedRetryButton), for: .touchUpInside)
+        retryButton?.addTarget(self, action: #selector(didTapRetryButton), for: .touchUpInside)
     }
     
     @objc
-    func didTappedRetryButton(_ sender: UIButton) {
+    func didTapRetryButton(_ sender: UIButton) {
         retryAction?()
     }
     

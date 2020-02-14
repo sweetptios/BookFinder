@@ -12,7 +12,7 @@
 		3B9F627723F2A829001A244A /* EtcMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F627623F2A829001A244A /* EtcMock.swift */; };
 		3BE865B823E53224007C8E5D /* BookFinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865B723E53224007C8E5D /* BookFinderUITests.swift */; };
 		3BE865C623E532B5007C8E5D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 3BE865C523E532B5007C8E5D /* Podfile */; };
-		3BE8661E23E536D4007C8E5D /* INetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865D823E536D4007C8E5D /* INetworkingService.swift */; };
+		3BE8661E23E536D4007C8E5D /* NetworkingServiceAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865D823E536D4007C8E5D /* NetworkingServiceAvailable.swift */; };
 		3BE8661F23E536D4007C8E5D /* BookSummaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865DA23E536D4007C8E5D /* BookSummaryRepository.swift */; };
 		3BE8662123E536D4007C8E5D /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865DC23E536D4007C8E5D /* ServerAPI.swift */; };
 		3BE8662223E536D4007C8E5D /* BookIndexPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE865DE23E536D4007C8E5D /* BookIndexPresenter.swift */; };
@@ -96,7 +96,7 @@
 		3BE865B723E53224007C8E5D /* BookFinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookFinderUITests.swift; sourceTree = "<group>"; };
 		3BE865B923E53224007C8E5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BE865C523E532B5007C8E5D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		3BE865D823E536D4007C8E5D /* INetworkingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INetworkingService.swift; sourceTree = "<group>"; };
+		3BE865D823E536D4007C8E5D /* NetworkingServiceAvailable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingServiceAvailable.swift; sourceTree = "<group>"; };
 		3BE865DA23E536D4007C8E5D /* BookSummaryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSummaryRepository.swift; sourceTree = "<group>"; };
 		3BE865DC23E536D4007C8E5D /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
 		3BE865DE23E536D4007C8E5D /* BookIndexPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookIndexPresenter.swift; sourceTree = "<group>"; };
@@ -235,6 +235,7 @@
 		3BE8659423E53222007C8E5D /* BookFinder */ = {
 			isa = PBXGroup;
 			children = (
+				66A901DA23E7D630009E7942 /* Extensions */,
 				3BE865E723E536D4007C8E5D /* Entities */,
 				3BE865E023E536D4007C8E5D /* UserCases */,
 				3BE865D523E536D4007C8E5D /* InterfaceAdapters */,
@@ -288,7 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				3BE865D923E536D4007C8E5D /* Product */,
-				3BE865D823E536D4007C8E5D /* INetworkingService.swift */,
+				3BE865D823E536D4007C8E5D /* NetworkingServiceAvailable.swift */,
 				3BE865DC23E536D4007C8E5D /* ServerAPI.swift */,
 			);
 			path = Networking;
@@ -341,7 +342,6 @@
 		3BE865E723E536D4007C8E5D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				66A901DA23E7D630009E7942 /* Extensions */,
 				3BE865E823E536D4007C8E5D /* Book.swift */,
 			);
 			path = Entities;
@@ -795,7 +795,7 @@
 				66A79BCC23EB82B700E8FAB6 /* UIImageView+.swift in Sources */,
 				3BE8662A23E536D4007C8E5D /* CALayer+.swift in Sources */,
 				3BE8662923E536D4007C8E5D /* NetworkingService.swift in Sources */,
-				3BE8661E23E536D4007C8E5D /* INetworkingService.swift in Sources */,
+				3BE8661E23E536D4007C8E5D /* NetworkingServiceAvailable.swift in Sources */,
 				3BE8663E23E536D4007C8E5D /* NiceAnimationController.swift in Sources */,
 				3B9F627223F2A5C1001A244A /* OtherAppServiceAvailable.swift in Sources */,
 				3BE8662E23E536D4007C8E5D /* UIView+.swift in Sources */,

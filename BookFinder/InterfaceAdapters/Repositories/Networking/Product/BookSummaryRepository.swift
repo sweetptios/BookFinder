@@ -10,10 +10,10 @@ import Foundation
 
 class BookSummaryRepository: IBookSummaryRepository {
         
-    private let networking: INetworkingService
+    private let networking: NetworkingServiceAvailable
     private let apiKey: String = "AIzaSyCdyRfz2EwdpHesMXGGxgsaT37G-NsOy_4"
 
-    required init(networking: INetworkingService) {
+    required init(networking: NetworkingServiceAvailable) {
         self.networking = networking
     }
     

@@ -14,7 +14,7 @@ class IRepositoryStub<T> {
     private var testData: T?
     private(set) var testErrorMessage = "error"
     
-    required init(networking: INetworkingService = NetworkingSeriveMock()) {}
+    required init(networking: NetworkingServiceAvailable = NetworkingSeriveMock()) {}
     
     func setSuccess(_ flag: Bool) {
         success = flag

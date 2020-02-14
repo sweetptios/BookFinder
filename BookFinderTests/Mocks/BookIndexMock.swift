@@ -148,7 +148,7 @@ final class BookIndexViewMock: BookIndexViewControllable {
 
 final class BookSummaryRepositoryMock: IBookSummaryRepository {
     
-    init(networking: INetworkingService) {}
+    init(networking: NetworkingServiceAvailable) {}
     
     func fetchBooks(page: Int, keyword: String, maxResultCount: Int, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         Stubber.invoke(fetchBooks, args: escaping(page, keyword, maxResultCount, completion))
