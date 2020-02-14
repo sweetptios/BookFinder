@@ -266,7 +266,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
 
     `completion?(.success((books: data.toBooks(), totalCount: data.totalItems ?? 0)))`
 
-    위의 실행문에서`toBooks()` 가 BookIndexAPIModel을 Book ****엔티티로 변환합니다. 
+    위의 실행문에서`toBooks()` 가 BookIndexAPIModel을 Book 엔티티로 변환합니다. 
 
         class BookSummaryRepository: IBookSummaryRepository {
                 
