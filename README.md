@@ -212,7 +212,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
 
     > Clean Architecture에서,  아키텍처가 "시스템이 프레임워크 독립성을 가지게" 만들어야 한다고 말하고 있습니다. - 아키텍처는 ...라이브러리를 제공하는 소프트웨어, 즉, 프레임워크의 존재여부에 의존하지 않는다. ....프레임워크를 도구로 사용할 수 있으며, 프레임워크가 지닌 제약사항안으로 시스템을 욱여 넣도록 강제하지 않는다 (p214) -  그러나, 프레임워크가 애플리케이션의 흐름을 직접 제어할 수 있다고 보는 측면이 있기 때문에, 여기서 말하는 프레임워크를 일반적인 라이브러리라고 봤을때 헤깔리지 않았습니다.
 
-    예를 들어,  BookIndexViewControllers는 뷰를 제공하기 위해 UIKit을 사용하며,  NetworkingService 는 RestAPI를 호출하기 위해 Alamofire를 사용합니다. 이들은 interface adapter layer에서 정의한 protocol을 구현하는 방식으로 앱에게 서비스를 제공합니다. 따라서, 앱이 정말 필요로하는 기능을 구현하게 되고, 앱이 라이브러리의 구현방식에 종속되지 않게 해줍니다.         
+    예를 들어,  BookIndexViewController는 뷰를 제공하기 위해 UIKit을 사용하며,  NetworkingService 는 RestAPI를 호출하기 위해 Alamofire를 사용합니다. 이들은 interface adapter layer에서 정의한 protocol을 구현하는 방식으로 앱에게 서비스를 제공합니다. 따라서, 앱이 정말 필요로하는 기능을 구현하게 되고, 앱이 라이브러리의 구현방식에 종속되지 않게 해줍니다.         
 
                
 
