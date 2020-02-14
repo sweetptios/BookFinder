@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol INetworkingService {
+protocol NetworkingServiceAvailable {
      func request(_ api: ServerAPI, parameters: [String: Any]?) -> IDataRequest?
 }
 

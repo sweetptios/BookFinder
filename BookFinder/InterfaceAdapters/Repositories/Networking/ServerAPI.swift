@@ -14,35 +14,35 @@ enum ServerAPI {
     case books
 }
 
-enum TParameterEncoding {
+enum ParameterEncodingType {
     case URLEncoding
 }
 
-enum THTTPMethod: String {
+enum HTTPMethodType: String {
     case get = "GET"
 }
 
-enum TDomain :String {
+enum DomainType :String {
     case main = "https://www.googleapis.com"
 }
 
 extension ServerAPI {
     
-    var parameterEncoding: TParameterEncoding {
+    var parameterEncoding: ParameterEncodingType {
         switch self {
         default:
             return .URLEncoding
         }
     }
     
-    var method: THTTPMethod {
+    var method: HTTPMethodType {
         switch self {
         default:
             return .get
         }
     }
     
-    var domain: TDomain {
+    var domain: DomainType {
         switch self {
         default:
             return .main

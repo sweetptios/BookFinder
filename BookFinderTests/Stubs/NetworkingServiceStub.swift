@@ -9,7 +9,7 @@
 import Foundation
 @testable import BookFinder
 
-class NetworkingServiceStub: INetworkingService {
+class NetworkingServiceStub: NetworkingServiceAvailable {
 
     private var success: Bool = false
     private var resultJson: String = ""
