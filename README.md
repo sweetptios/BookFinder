@@ -224,9 +224,9 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
 
     하지만, 하위 레이어의 변경은 상위 레이어에 영향을 미치지 않습니다. 
 
-    domain에 변경사항이 생기면, entity, use case, presenter, view가 모두 변경이 됩니다.  
+    domain에 변경사항이 생기면, 모든 레이어가 변경이 됩니다. 
 
-    기능이 변경되면 usecase, presenter, view가 함께 수정이 됩니다. 
+    기능이 변경되면 use case, interface adapter, driver가 함께 수정이 됩니다.
 
     뷰의 레이아웃 또는 속성이 변경이 되면 view만 수정하면 됩니다. 
 
