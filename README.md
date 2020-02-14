@@ -139,7 +139,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
             func scrollToTop()
         }
 
-    BookIndexPresenter는 BookIndexViewControllable 타입의 객체를 참조하고 필요할 때 메써드를 호출합니다. 그리고,  데이터는 뷰에서 바로 표시할 수 있는 형태로 맵핑 후 전달합니다. 이제 뷰에 표시할 데이터의 형태를 바꾸기 위해서는 presenter를 수정하면 됩니다.  뷰의 레이아웃이나 속성이 변경이 된다면 뷰만 수정하면 됩니다.  
+    BookIndexPresenter는 BookIndexViewControllable 타입의 객체를 참조하고 필요할 때 메쏘드를 호출합니다. 그리고,  데이터는 뷰에서 바로 표시할 수 있는 형태로 맵핑 후 전달합니다. 이제 뷰에 표시할 데이터의 형태를 바꾸기 위해서는 presenter를 수정하면 됩니다.  뷰의 레이아웃이나 속성이 변경이 된다면 뷰만 수정하면 됩니다.  
 
         class BookIndexPresenter {
             private weak var view: BookIndexViewControllable?
@@ -208,7 +208,7 @@ clean architecture를 적용해본 결과를 정리해봤습니다.
             ...
         }
 
-     **framework & driver layer**에는 UIKit, Alamofire 등의 라이브러리와 이러한 라이브러리를 사용하는 driver 있습니다.
+     **framework & driver layer**에는 UIKit, Alamofire 등의 라이브러리와 이러한 라이브러리를 사용하는 driver가 있습니다.
 
     > Clean Architecture에서,  아키텍처가 "시스템이 프레임워크 독립성을 가지게" 만들어야 한다고 말하고 있습니다. - 아키텍처는 ...라이브러리를 제공하는 소프트웨어, 즉, 프레임워크의 존재여부에 의존하지 않는다. ....프레임워크를 도구로 사용할 수 있으며, 프레임워크가 지닌 제약사항안으로 시스템을 욱여 넣도록 강제하지 않는다 (p214) -  그러나, 프레임워크가 애플리케이션의 흐름을 직접 제어할 수 있다고 보는 측면이 있기 때문에, 여기서 말하는 프레임워크를 일반적인 라이브러리라고 봤을때 헤깔리지 않았습니다.
 
