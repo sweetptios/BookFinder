@@ -109,12 +109,11 @@ protocol IBookSummaryRepository {
 
 ```swift
 func didSelectSeeingMore() {
-        loadBooksMore()
-    }
+    loadBooksMore()
 }
 
 private func loadBooksMore() {
-        repository.fetchBooks(page: state.page + 1, keyword: state.keyword, maxResultCount: maxResultCount){[weak self](result) in
+    repository.fetchBooks(page: state.page + 1, keyword: state.keyword, maxResultCount: maxResultCount){[weak self](result) in
             guard let self = self else { return }
             switch(result) {
             case let .success(data):
