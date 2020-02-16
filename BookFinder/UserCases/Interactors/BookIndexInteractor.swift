@@ -23,12 +23,12 @@ protocol BookIndexOutputBoundary: class {
     func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: Int)
-    func alertErrorMessage(_ message: String)
+    func showErrorMessage(_ message: String)
     func showLoadingIndicator()
     func hideLoadingIndicator()
     func activateRetryOnSeeingMore()
     func deactivateRetryOnSeeingMore()
-    func scrollToTop()
+    func moveToTop()
 }
 
 class BookIndexInteractor {
@@ -101,11 +101,11 @@ extension BookIndexInteractor: BookIndexInputBoundary {
                 self.state.page = newPage
                 self.state.products = data.books
                 self.state.totalCount = data.totalCount
-                self.outputBoundary?.scrollToTop()
+                self.outputBoundary?.moveToTop()
             case let .failure(error):
                 self.state = State()
                 self.outputBoundary?.showSearchKeyword(self.state.keyword)
-                self.outputBoundary?.alertErrorMessage(error.localizedDescription)
+                self.outputBoundary?.showErrorMessage(error.localizedDescription)
             }
             self.outputBoundary?.showBooks(self.state.products.map{ BookSummary(from
             :$0) })
@@ -126,7 +126,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
                 self.outputBoundary?.showTotalCount(self.state.totalCount)
             case let .failure(error):
                 self.outputBoundary?.activateRetryOnSeeingMore()
-                self.outputBoundary?.alertErrorMessage(error.localizedDescription)
+                self.outputBoundary?.showErrorMessage(error.localizedDescription)
             }
         }
     }

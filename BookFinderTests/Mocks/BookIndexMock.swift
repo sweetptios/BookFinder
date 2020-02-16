@@ -65,8 +65,8 @@ final class BookIndexOutputBoundaryMock: BookIndexOutputBoundary {
         Stubber.invoke(showTotalCount, args: count)
     }
     
-    func alertErrorMessage(_ message: String) {
-        Stubber.invoke(alertErrorMessage, args: message)
+    func showErrorMessage(_ message: String) {
+        Stubber.invoke(showErrorMessage, args: message)
     }
     
     func activateRetryOnSeeingMore() {
@@ -89,8 +89,8 @@ final class BookIndexOutputBoundaryMock: BookIndexOutputBoundary {
         Stubber.invoke(showSearchKeyword, args: keyword)
     }
     
-    func scrollToTop() {
-        Stubber.invoke(scrollToTop, args: ())
+    func moveToTop() {
+        Stubber.invoke(moveToTop, args: ())
     }
     
 }

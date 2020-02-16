@@ -49,7 +49,7 @@ class BookDetailInteractorTests: XCTestCase {
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.goBackToPrevWebPage).count).to(equal(1))
     }
-    
+
     func test_앞으로가기를선택했을때_다음웹페이지를보여준다() {
         // [given]
         registerMethodsInMock()

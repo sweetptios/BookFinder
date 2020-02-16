@@ -29,7 +29,7 @@ class BookIndexInteractorTests: XCTestCase {
         Stubber.register(outputBoundaryMock.showSearchKeyword) { _ in }
         Stubber.register(outputBoundaryMock.showLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showBooks) { _ in }
-        Stubber.register(outputBoundaryMock.scrollToTop) { _ in }
+        Stubber.register(outputBoundaryMock.moveToTop) { _ in }
         Stubber.register(outputBoundaryMock.hideLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showTotalCount) { _ in }
         repositoryStub.setTestData(([],0))
@@ -41,7 +41,7 @@ class BookIndexInteractorTests: XCTestCase {
         expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
-        expect(Stubber.executions(self.outputBoundaryMock.scrollToTop).count).to(equal(1))
+        expect(Stubber.executions(self.outputBoundaryMock.moveToTop).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.hideLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showTotalCount).count).to(equal(1))
     }
@@ -51,7 +51,7 @@ class BookIndexInteractorTests: XCTestCase {
         Stubber.register(outputBoundaryMock.showLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showBooks) { _ in }
         Stubber.register(outputBoundaryMock.showSearchKeyword) { _ in }
-        Stubber.register(outputBoundaryMock.alertErrorMessage) { _ in }
+        Stubber.register(outputBoundaryMock.showErrorMessage) { _ in }
         Stubber.register(outputBoundaryMock.hideLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showTotalCount) { _ in }
         repositoryStub.setSuccess(false)
@@ -65,7 +65,7 @@ class BookIndexInteractorTests: XCTestCase {
         expect(Stubber.executions(self.outputBoundaryMock.showSearchKeyword).count).to(equal(2))
         expect(Stubber.executions(self.outputBoundaryMock.hideLoadingIndicator).count).to(equal(1))
         
-        let f1 = Stubber.executions(self.outputBoundaryMock.alertErrorMessage)
+        let f1 = Stubber.executions(self.outputBoundaryMock.showErrorMessage)
         expect(f1[safe: 0]?.arguments).to(equal(errorMessage))
         expect(Stubber.executions(self.outputBoundaryMock.hideLoadingIndicator).count).to(equal(1))
         let f2 = Stubber.executions(self.outputBoundaryMock.showTotalCount)
@@ -118,13 +118,13 @@ class BookIndexInteractorTests: XCTestCase {
         // [given]
         Stubber.register(outputBoundaryMock.deactivateRetryOnSeeingMore) { _ in }
         Stubber.register(outputBoundaryMock.activateRetryOnSeeingMore) { _ in }
-        Stubber.register(outputBoundaryMock.alertErrorMessage) { _ in }
+        Stubber.register(outputBoundaryMock.showErrorMessage) { _ in }
         repositoryStub.setSuccess(false)
         // [when]
         interactor.didSelectSeeingMore()
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.activateRetryOnSeeingMore).count).to(equal(1))
-        expect(Stubber.executions(self.outputBoundaryMock.alertErrorMessage).count).to(equal(1))
+        expect(Stubber.executions(self.outputBoundaryMock.showErrorMessage).count).to(equal(1))
     }
     
 
@@ -143,7 +143,7 @@ class BookIndexInteractorTests: XCTestCase {
         // [given]
         Stubber.register(outputBoundaryMock.showLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showBooks) { _ in }
-        Stubber.register(outputBoundaryMock.scrollToTop) { _ in }
+        Stubber.register(outputBoundaryMock.moveToTop) { _ in }
         Stubber.register(outputBoundaryMock.hideLoadingIndicator) { _ in }
         Stubber.register(outputBoundaryMock.showTotalCount) { _ in }
         
@@ -154,7 +154,7 @@ class BookIndexInteractorTests: XCTestCase {
         // [then]
         expect(Stubber.executions(self.outputBoundaryMock.showLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showBooks).count).to(equal(1))
-        expect(Stubber.executions(self.outputBoundaryMock.scrollToTop).count).to(equal(1))
+        expect(Stubber.executions(self.outputBoundaryMock.moveToTop).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.hideLoadingIndicator).count).to(equal(1))
         expect(Stubber.executions(self.outputBoundaryMock.showTotalCount).count).to(equal(1))
     }

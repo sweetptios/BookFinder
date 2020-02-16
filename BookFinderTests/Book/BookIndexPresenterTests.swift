@@ -79,7 +79,7 @@ class BookIndexPresenterTests: XCTestCase {
         // [given]
         Stubber.register(viewMock.scrollToTop) { _ in }
         // [when]
-        presenter.scrollToTop()
+        presenter.moveToTop()
         // [then]
         expect(Stubber.executions(self.viewMock.scrollToTop).count).to(equal(1))
     }

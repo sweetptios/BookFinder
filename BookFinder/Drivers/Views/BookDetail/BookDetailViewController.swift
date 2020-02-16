@@ -63,10 +63,6 @@ class BookDetailViewController: UIViewController {
     func didTapReloadButton(_ sender: Any) {
         inputBoundary.didSelectReload()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 }
 
 //MARK: - setup Views
@@ -208,7 +204,7 @@ extension BookDetailViewController: WKUIDelegate {
        alert.addAction(UIAlertAction(title: "확인", style: .default){ _ in
            completionHandler()
        })
-       present(alert, animated: true, completion: nil)
+       present(alert, animated: true)
    }
    
    
@@ -221,7 +217,7 @@ extension BookDetailViewController: WKUIDelegate {
        alert.addAction(UIAlertAction(title: "취소", style: .default){ _ in
            completionHandler(false)
        })
-       present(alert, animated: true, completion: nil)
+       present(alert, animated: true)
    }
    
    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
@@ -238,7 +234,7 @@ extension BookDetailViewController: WKUIDelegate {
        alert.addAction(UIAlertAction(title: "취소", style: .default){ (action) in
            completionHandler(nil)
        })
-       present(alert, animated: true, completion: nil)
+       present(alert, animated: true)
    }
 }
 

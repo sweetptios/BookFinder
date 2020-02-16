@@ -57,7 +57,7 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
         view?.showTotalCount("Result: (\(count))")
     }
     
-    func alertErrorMessage(_ message: String) {
+    func showErrorMessage(_ message: String) {
         view?.alertErrorMessage(title: "오류", message: message, buttonTitle: "확인")
     }
     
@@ -81,7 +81,7 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
         view?.showSearchKeyword(keyword)
     }
     
-    func scrollToTop() {
+    func moveToTop() {
         view?.scrollToTop()
     }
     
