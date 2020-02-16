@@ -77,11 +77,11 @@ class BookIndexPresenterTests: XCTestCase {
     
     func test_맨앞으로스크롤할수있다() {
         // [given]
-        Stubber.register(viewMock.scrollToTop) { _ in }
+        Stubber.register(viewMock.moveToTop) { _ in }
         // [when]
         presenter.moveToTop()
         // [then]
-        expect(Stubber.executions(self.viewMock.scrollToTop).count).to(equal(1))
+        expect(Stubber.executions(self.viewMock.moveToTop).count).to(equal(1))
     }
     
     func test_전체책개수를보여줄수있다() {

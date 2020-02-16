@@ -226,7 +226,7 @@ extension BookIndexViewController: BookIndexViewControllable {
         collectionView?.reloadData()
     }
     
-    func alertErrorMessage(title: String, message: String, buttonTitle: String) {
+    func showErrorMessage(title: String, message: String, buttonTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonTitle, style: .default))
         present(alert, animated: true)
@@ -263,7 +263,7 @@ extension BookIndexViewController: BookIndexViewControllable {
         loadingIndicatorView?.stopAnimating()
     }
     
-    func scrollToTop() {
+    func moveToTop() {
         // 로드된 셀이 없을 때 호출되면 invalid IndexPath warning 발생하는 문제 해결
         if csg.itemCount(at:.book) > 0 {
             collectionView?.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)

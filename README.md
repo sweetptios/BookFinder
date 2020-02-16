@@ -92,12 +92,12 @@ protocol BookIndexOutputBoundary: class {
     func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: Int)
-    func alertErrorMessage(_ message: String)
+    func showErrorMessage(_ message: String)
     func showLoadingIndicator()
     func hideLoadingIndicator()
     func activateRetryOnSeeingMore()
     func deactivateRetryOnSeeingMore()
-    func scrollToTop()
+    func moveToTop()
 }
 
 protocol IBookSummaryRepository {
@@ -124,7 +124,7 @@ private func loadBooksMore() {
                 self.outputBoundary?.showTotalCount(self.state.totalCount)
             case let .failure(error):
                 self.outputBoundary?.activateRetryOnSeeingMore()
-                self.outputBoundary?.alertErrorMessage(error.localizedDescription)
+                self.outputBoundary?.showErrorMessage(error.localizedDescription)
             }
         }
     }
@@ -143,12 +143,12 @@ protocol BookIndexViewControllable: class {
     func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: String)
-    func alertErrorMessage(title: String, message: String, buttonTitle: String)
+    func showErrorMessage(title: String, message: String, buttonTitle: String)
     func deactivateRetryOnSeeingMore()
     func activateRetryOnSeeingMore()
     func showLoadingIndicator()
     func hideLoadingIndicator()
-    func scrollToTop()
+    func moveToTop()
 }
 ```
 

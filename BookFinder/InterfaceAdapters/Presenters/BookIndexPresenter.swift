@@ -14,12 +14,12 @@ protocol BookIndexViewControllable: class {
     func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: String)
-    func alertErrorMessage(title: String, message: String, buttonTitle: String)
+    func showErrorMessage(title: String, message: String, buttonTitle: String)
     func deactivateRetryOnSeeingMore()
     func activateRetryOnSeeingMore()
     func showLoadingIndicator()
     func hideLoadingIndicator()
-    func scrollToTop()
+    func moveToTop()
 }
 
 //MARK: - BookIndexPresenter
@@ -58,7 +58,7 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
     }
     
     func showErrorMessage(_ message: String) {
-        view?.alertErrorMessage(title: "오류", message: message, buttonTitle: "확인")
+        view?.showErrorMessage(title: "오류", message: message, buttonTitle: "확인")
     }
     
     func activateRetryOnSeeingMore() {
@@ -82,7 +82,7 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
     }
     
     func moveToTop() {
-        view?.scrollToTop()
+        view?.moveToTop()
     }
     
 }

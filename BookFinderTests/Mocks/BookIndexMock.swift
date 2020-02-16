@@ -101,8 +101,8 @@ final class BookIndexViewMock: BookIndexViewControllable {
         Stubber.invoke(showBooks, args: products)
     }
     
-    func alertErrorMessage(title: String, message: String, buttonTitle: String) {
-        Stubber.invoke(alertErrorMessage, args: (title, message, buttonTitle))
+    func showErrorMessage(title: String, message: String, buttonTitle: String) {
+        Stubber.invoke(showErrorMessage, args: (title, message, buttonTitle))
     }
     
     func showBookDetail(id: String, detailInfoUrl: URL?) {
@@ -137,8 +137,8 @@ final class BookIndexViewMock: BookIndexViewControllable {
         Stubber.invoke(showSearchKeyword, args: keyword)
     }
     
-    func scrollToTop() {
-        Stubber.invoke(scrollToTop, args: ())
+    func moveToTop() {
+        Stubber.invoke(moveToTop, args: ())
     }
     
     func showTotalCount(_ count: String) {
