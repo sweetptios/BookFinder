@@ -69,7 +69,7 @@ class BookDetailViewController: UIViewController {
 
 extension BookDetailViewController {
     
-    fileprivate func setupViews() {
+    private func setupViews() {
         setupWebkitView()
         setupNavigationBar()
         setupToolBar()
@@ -164,7 +164,7 @@ extension BookDetailViewController: UIAdaptivePresentationControllerDelegate {
 
 extension BookDetailViewController {
     
-    fileprivate func addObservers() {
+    private func addObservers() {
         
         estimatedProgressObservationToken = webkitView?.observe(\.estimatedProgress, options: [.old,.new]) { [weak self](observed, change) in
 

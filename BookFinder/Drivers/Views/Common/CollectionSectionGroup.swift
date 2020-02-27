@@ -95,7 +95,7 @@ extension CollectionSectionType {
 
 struct CollectionSection<T: CollectionSectionType> {
     private(set) var type: T
-    fileprivate(set) var items: [CollectionItem] = []
+    private(set) var items: [CollectionItem] = []
 }
 extension CollectionSection {
     var itemCount: Int { items.filter{ $0.hasData }.count }

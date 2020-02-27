@@ -67,7 +67,7 @@ struct BookIndexLayout {
 
 extension BookIndexViewController {
     
-    fileprivate func setupViews() {
+    private func setupViews() {
         view.backgroundColor = AppColor.Background.purple
         setupCollectionView()
         setupSearchBar()
@@ -192,7 +192,7 @@ extension BookIndexViewController: UICollectionViewDelegateFlowLayout {
 extension BookIndexViewController: UIViewControllerTransitioningDelegate {
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return NicePresentAnimationController()
+        NicePresentAnimationController()
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {

@@ -41,7 +41,7 @@ class BookIndexInteractor {
     private var columnCount = 1
     var maxResultCount: Int { (resultCountMaxLimit / columnCount) * columnCount }
     
-    fileprivate struct State {
+    private struct State {
 
         static let defaultKeyword: String = "힐링"
         
