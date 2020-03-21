@@ -11,7 +11,6 @@ import Foundation
 //MARK: - BookIndexViewControllable
 protocol BookIndexViewControllable: class {
     func showBooks(_ products: [BookIndexItemViewData])
-    func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: String)
     func showErrorMessage(title: String, message: String, buttonTitle: String)
@@ -47,10 +46,6 @@ extension BookIndexPresenter: BookIndexOutputBoundary {
             }
             return BookIndexItemViewData(id: $0.id, thumbnailUrl: $0.thumbnailImage, title: $0.title, author: displayedAuthors, publishedDate: displayedDate)
         })
-    }
-    
-    func showBookDetail(id: String, detailInfoUrl: URL?) {
-        view?.showBookDetail(id: id, detailInfoUrl: detailInfoUrl)
     }
     
     func showTotalCount(_ count: Int) {

@@ -11,7 +11,7 @@ import UIKit
 class BookIndexViewController: UIViewController {
 
     private var inputBoundary: BookIndexInputBoundary
-    private var productDetailVCFactory: (String, URL?) -> UIViewController
+
     private var csg: BookIndexCSG
     
     @IBOutlet weak var collectionView: UICollectionView?
@@ -23,9 +23,8 @@ class BookIndexViewController: UIViewController {
     @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView?
     private var moreRetryVisible: Bool = false
 
-    init(inputBoundary: BookIndexInputBoundary, csg: BookIndexCSG, productDetailVCFactory: @escaping (String, URL?) -> UIViewController) {
+    init(inputBoundary: BookIndexInputBoundary, csg: BookIndexCSG) {
         self.inputBoundary = inputBoundary
-        self.productDetailVCFactory = productDetailVCFactory
         self.csg = csg
         super.init(nibName: nil, bundle: nil)
     }
@@ -230,11 +229,6 @@ extension BookIndexViewController: BookIndexViewControllable {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonTitle, style: .default))
         present(alert, animated: true)
-    }
-    
-    func showBookDetail(id: String, detailInfoUrl: URL?) {
-        let viewController = productDetailVCFactory(id, detailInfoUrl)
-        present(viewController, animated: true, completion: nil)
     }
     
     func showSearchKeyword(_ keyword: String) {

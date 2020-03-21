@@ -11,6 +11,8 @@ import Stubber
 @testable import BookFinder
 
 final class BookIndexInteractorMock: BookIndexInputBoundary {
+    init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository, router: BookIndexRouterLogic) {}
+    
 
     init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository) {}
     
@@ -152,5 +154,12 @@ final class BookSummaryRepositoryMock: IBookSummaryRepository {
     
     func fetchBooks(page: Int, keyword: String, maxResultCount: Int, completion: ((Result<(books: [Book], totalCount: Int), RepositoryError>) -> Void)?) {
         Stubber.invoke(fetchBooks, args: escaping(page, keyword, maxResultCount, completion))
+    }
+}
+
+final class BookIndexRouterMock: BookIndexRouterLogic {
+    
+    func showBookDetail(_ id: String, _ url: URL?) {
+        Stubber.invoke(showBookDetail, args: (id, url))
     }
 }

@@ -18,9 +18,11 @@ extension AppDependency {
         let window = UIWindow()
         
         let presenter = BookIndexPresenter()
-        let interactor = BookIndexInteractor(outputBoundary: presenter, repository: BookSummaryRepository(networking: NetworkingService()))
-        var rootViewController: BookIndexViewController!
-        rootViewController = BookIndexViewController(inputBoundary: interactor, csg: BookIndexCSG(), productDetailVCFactory: {
+        let router = BookIndexRouter()
+        let interactor = BookIndexInteractor(outputBoundary: presenter, repository: BookSummaryRepository(networking: NetworkingService()), router: router)
+        let rootViewController = BookIndexViewController(inputBoundary: interactor, csg: BookIndexCSG())
+        router.sourceViewController = rootViewController
+        router.detailVCFactory = {
             let presenter = BookDetailPresenter()
             let interactor = BookDetailInteractor(outputBoundary: presenter, itemId: $0, detailInfoUrl: $1, otherAppService: OtherAppService())
             let viewController = BookDetailViewController(inputBoundary: interactor)
@@ -29,7 +31,7 @@ extension AppDependency {
             navigationController.transitioningDelegate = rootViewController
             navigationController.presentationController?.delegate = viewController
             return navigationController
-        })
+        }
         presenter.setView(rootViewController)
         window.rootViewController = rootViewController
         

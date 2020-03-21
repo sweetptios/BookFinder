@@ -16,10 +16,12 @@ class BookIndexInteractorTests: XCTestCase {
     var interactor: BookIndexInputBoundary!
     var repositoryStub = BookSummaryRepositoryStub()
     var outputBoundaryMock: BookIndexOutputBoundaryMock!
+    var bookIndexRouterMock: BookIndexRouterMock!
 
     override func setUp() {
         outputBoundaryMock = BookIndexOutputBoundaryMock()
-        interactor = BookIndexInteractor(outputBoundary: outputBoundaryMock, repository: repositoryStub)
+        bookIndexRouterMock = BookIndexRouterMock()
+        interactor = BookIndexInteractor(outputBoundary: outputBoundaryMock, repository: repositoryStub, router: bookIndexRouterMock)
     }
 
     override func tearDown() {}
@@ -74,7 +76,7 @@ class BookIndexInteractorTests: XCTestCase {
 
     func test_특정책을선택했을때_책상세화면으로이동한다() {
         // [given]
-        Stubber.register(outputBoundaryMock.showBookDetail) { _ in }
+        Stubber.register(bookIndexRouterMock.showBookDetail) { _ in }
         let testList = [Book(id: "a", detailInfo: URL(string: "https://test.com"))]
         let testResult = (testList, 0)
         let testIndex = testList.count - 1
@@ -85,7 +87,7 @@ class BookIndexInteractorTests: XCTestCase {
         // [when]
         interactor.didSelectBook(index: testIndex)
         // [then]
-        let f = Stubber.executions(outputBoundaryMock.showBookDetail)
+        let f = Stubber.executions(bookIndexRouterMock.showBookDetail)
         expect(f[safe: 0]?.arguments.0).to(equal(testList[testIndex].id))
         expect(f[safe: 0]?.arguments.1).to(equal(testList[testIndex].detailInfo))
     }
@@ -131,7 +133,8 @@ class BookIndexInteractorTests: XCTestCase {
     func test_더보기재시도가선택됐을때_다음페이지책목록을요청한다() {
         // [given]
         let repositoryMock = BookSummaryRepositoryMock(networking: NetworkingSeriveMock())
-        interactor = BookIndexInteractor(outputBoundary: outputBoundaryMock, repository: repositoryMock)
+        let dummyBookIndexRouter = BookIndexRouter()
+        interactor = BookIndexInteractor(outputBoundary: outputBoundaryMock, repository: repositoryMock, router: dummyBookIndexRouter)
         Stubber.register(repositoryMock.fetchBooks) { _ in }
         // [when]
         interactor.didRetryOnSeeingMore()

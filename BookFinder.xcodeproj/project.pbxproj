@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B28C5CF2425A6C700B36843 /* BookIndexRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B28C5CE2425A6C700B36843 /* BookIndexRouter.swift */; };
 		3B9F627223F2A5C1001A244A /* OtherAppServiceAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F627123F2A5C1001A244A /* OtherAppServiceAvailable.swift */; };
 		3B9F627523F2A6E7001A244A /* OtherAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F627423F2A6E7001A244A /* OtherAppService.swift */; };
 		3B9F627723F2A829001A244A /* EtcMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F627623F2A829001A244A /* EtcMock.swift */; };
@@ -85,6 +86,7 @@
 /* Begin PBXFileReference section */
 		2CD6DFE1E99778A5CD345DA9 /* Pods-BookFinderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookFinderTests.release.xcconfig"; path = "Target Support Files/Pods-BookFinderTests/Pods-BookFinderTests.release.xcconfig"; sourceTree = "<group>"; };
 		34B8E841BC7D53E58F461F5C /* Pods-BookFinder-BookFinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookFinder-BookFinderUITests.release.xcconfig"; path = "Target Support Files/Pods-BookFinder-BookFinderUITests/Pods-BookFinder-BookFinderUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3B28C5CE2425A6C700B36843 /* BookIndexRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookIndexRouter.swift; sourceTree = "<group>"; };
 		3B9F627123F2A5C1001A244A /* OtherAppServiceAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAppServiceAvailable.swift; sourceTree = "<group>"; };
 		3B9F627423F2A6E7001A244A /* OtherAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherAppService.swift; sourceTree = "<group>"; };
 		3B9F627623F2A829001A244A /* EtcMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtcMock.swift; sourceTree = "<group>"; };
@@ -191,6 +193,13 @@
 				54BCE8C2A8060226F64AA8D9 /* Pods_BookFinderTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B28C5C9242576CF00B36843 /* builders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = builders;
 			sourceTree = "<group>";
 		};
 		3B9F627023F2A59A001A244A /* etc */ = {
@@ -403,6 +412,7 @@
 				3BE8660823E536D4007C8E5D /* BookIndexViewController.swift */,
 				3BE8660F23E536D4007C8E5D /* BookIndexViewController.xib */,
 				3BE8661023E536D4007C8E5D /* BookIndexCSG.swift */,
+				3B28C5CE2425A6C700B36843 /* BookIndexRouter.swift */,
 			);
 			path = BookIndex;
 			sourceTree = "<group>";
@@ -439,6 +449,7 @@
 		3BE8661923E536D4007C8E5D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				3B28C5C9242576CF00B36843 /* builders */,
 				3BE8661A23E536D4007C8E5D /* AppDependency.swift */,
 				3BE8661B23E536D4007C8E5D /* LaunchScreen.storyboard */,
 				3BE8661D23E536D4007C8E5D /* AppDelegate.swift */,
@@ -798,6 +809,7 @@
 				3BE8661E23E536D4007C8E5D /* NetworkingServiceAvailable.swift in Sources */,
 				3BE8663E23E536D4007C8E5D /* NiceAnimationController.swift in Sources */,
 				3B9F627223F2A5C1001A244A /* OtherAppServiceAvailable.swift in Sources */,
+				3B28C5CF2425A6C700B36843 /* BookIndexRouter.swift in Sources */,
 				3BE8662E23E536D4007C8E5D /* UIView+.swift in Sources */,
 				3BE8662523E536D4007C8E5D /* IProductRepository.swift in Sources */,
 				3BE8664223E536D4007C8E5D /* BookIndexItemCell.swift in Sources */,

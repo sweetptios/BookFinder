@@ -8,8 +8,12 @@
 
 import Foundation
 
+protocol BookIndexRouterLogic: class {
+    func showBookDetail(_ id: String, _ url: URL?)
+}
+
 protocol BookIndexInputBoundary: class {
-    init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository)
+    init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository, router: BookIndexRouterLogic)
     func viewIsReady(columnCount: Int)
     func didSelectSeeingMore()
     func didRetryOnSeeingMore()
@@ -20,7 +24,6 @@ protocol BookIndexInputBoundary: class {
 
 protocol BookIndexOutputBoundary: class {
     func showBooks(_ productList: [BookSummary])
-    func showBookDetail(id: String, detailInfoUrl: URL?)
     func showSearchKeyword(_ keyword: String)
     func showTotalCount(_ count: Int)
     func showErrorMessage(_ message: String)
@@ -32,7 +35,8 @@ protocol BookIndexOutputBoundary: class {
 }
 
 class BookIndexInteractor {
-
+    
+    private var router: BookIndexRouterLogic?
     private var outputBoundary: BookIndexOutputBoundary?
     private var repository: IBookSummaryRepository
     private var state: State
@@ -51,7 +55,8 @@ class BookIndexInteractor {
         var totalCount: Int = 0
     }
     
-    public required init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository) {
+    public required init(outputBoundary: BookIndexOutputBoundary, repository: IBookSummaryRepository, router: BookIndexRouterLogic) {
+        self.router = router
         self.outputBoundary = outputBoundary
         self.repository = repository
         self.state = State()
@@ -69,7 +74,7 @@ extension BookIndexInteractor: BookIndexInputBoundary {
     
     func didSelectBook(index: Int) {
         if let product = state.products[safe: index] {
-            outputBoundary?.showBookDetail(id: product.id, detailInfoUrl: product.detailInfo)
+            router?.showBookDetail(product.id, product.detailInfo)
         }
     }
     
